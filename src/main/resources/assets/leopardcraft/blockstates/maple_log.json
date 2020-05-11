@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis = y": {"model": "maple_log"},
+        "axis = z": {"model": "maple_log_side"},
+        "axis = x": {"model": "maple_log_side", "y": 90},
+        "axis = none": {"model": "maple_bark"}
+    }
+}
