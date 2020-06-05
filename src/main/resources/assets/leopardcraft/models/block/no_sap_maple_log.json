@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:block/cube_column",
+    "textures": {
+        "end": "leopardcraft:block/no_sap_maple_log_top",
+        "side": "leopardcraft:block/no_sap_maple_log"
+    }
+}

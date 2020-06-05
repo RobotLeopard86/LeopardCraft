@@ -1,0 +1,44 @@
+{
+    "parent": "minecraft:block/block",
+    "textures": {
+     "particle": "#tapper" 
+    },
+    "elements": [
+        {   "from": [ 5,12, 7 ],
+            "to": [ 11, 13, 9 ],
+            "shade": true,
+            "faces": {
+                "down": {  "texture": "#tapper" },
+                "up":   { "texture": "#tapper" },
+                "north": {  "texture": "#tapper" },
+                "south": {  "texture": "#tapper" },
+                "east": {  "texture": "#tapper" },
+                "west": {  "texture": "#tapper" }
+            }
+        },
+        {   "from": [ 6,9, 0 ],
+            "to": [ 10, 12, 11 ],
+            "shade": true,
+            "faces": {
+                "down": {  "texture": "#tapper" },
+                "up":   { "texture": "#tapper" },
+                "north": {  "texture": "#tapper" },
+                "south": {  "texture": "#tapper" },
+                "east": {  "texture": "#tapper" },
+                "west": {  "texture": "#tapper" }
+            }
+        },
+        {   "from": [ 6,7, 8 ],
+            "to": [ 10, 9, 11 ],
+            "shade": true,
+            "faces": {
+                "down": {  "texture": "#tank" },
+                "up":   { "texture": "#tank" },
+                "north": {  "texture": "#tank" },
+                "south": {  "texture": "#tank" },
+                "east": {  "texture": "#tank" },
+                "west": {  "texture": "#tank" }
+            }
+        }
+    ]
+}

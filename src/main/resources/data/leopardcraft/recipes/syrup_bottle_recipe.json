@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "leopardcraft:sap_bottle"
+    },
+    "result": "leopardcraft:syrup_bottle",
+    "experience": 0
+}
