@@ -1,0 +1,48 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+        "0": "leopardcraft:block/sap_tapper_material",
+        "1": "leopardcraft:block/sap_tapper_material"
+    },
+    "elements": [
+        {
+            "name": "tank",
+            "from": [ 6.0, 2.0, 10.0 ], 
+            "to": [ 10.0, 5.0, 14.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 16, 16 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 16, 16  ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 16, 16  ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 16, 16  ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 16, 16  ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 16, 16  ] }
+            }
+        },
+        {
+            "name": "tube",
+            "from": [ 7.0, 5.0, 0.0 ], 
+            "to": [ 9.0, 6.0, 13.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 13.0, 1.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 1.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 13.0, 1.0 ] },
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 13.0 ] },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 13.0 ] }
+            }
+        },
+        {
+            "name": "faucet",
+            "from": [ 6.0, 6.0, 9.0 ], 
+            "to": [ 10.0, 7.0, 10.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 1.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 1.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 1.0 ] },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 1.0 ] }
+            }
+        }
+    ]
+}

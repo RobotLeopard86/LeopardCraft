@@ -35,7 +35,6 @@ public class SapTapperBlock extends Block {
 	static final DirectionProperty facing = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 	
 	
-	
 	public SapTapperBlock(Properties properties) {
 		super(properties);
 		this.getStateContainer().getBaseState().with(tankState, TankStates.EMPTY).with(facing, Direction.NORTH);

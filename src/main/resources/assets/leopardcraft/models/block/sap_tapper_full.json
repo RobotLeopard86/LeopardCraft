@@ -1,7 +1,6 @@
 {
-    "parent": "leopardcraft:block/sap_tapper_template",
+    "parent": "leopardcraft:block/sap_tapper_empty",
     "textures": {
-        "tapper": "leopardcraft:block/sap_tapper_material",
-        "tank": "leopardcraft:block/sap_tapper_full_tank_material"
+        "1": "leopardcraft:block/sap_tapper_full_tank_material"
     }
 }
