@@ -6,18 +6,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Foods;
 import net.minecraft.item.Food;
-import net.minecraft.item.Food.Builder;
+import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.Properties;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -51,7 +48,6 @@ public class LeopardCraft {
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
-
     public LeopardCraft() {
         LOGGER.info("Welcome to LeopardCraft!");
 
@@ -82,7 +78,7 @@ public class LeopardCraft {
         syrupBottleItem = new Item(new Item.Properties().group(ItemGroup.FOOD).food(Foods.GOLDEN_CARROT));
         sapBottleItem.setRegistryName("sap_bottle");
         syrupBottleItem.setRegistryName("syrup_bottle");
-        sapTapperBlock = new SapTapperBlock(Block.Properties.create(Material.IRON));
+        sapTapperBlock = new SapTapperBlock();
         sapTapperItem = new BlockItem(sapTapperBlock, new Item.Properties().group(ItemGroup.MISC));
         sapTapperItem.setRegistryName("sap_tapper");
         pancake = new Item(new Item.Properties().group(ItemGroup.FOOD).food(pancakeFood));
@@ -106,6 +102,7 @@ public class LeopardCraft {
         // do something that can only be done on the client
         minecraft = event.getMinecraftSupplier().get();
         LOGGER.info("Got game settings {}", minecraft.gameSettings);
+
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
