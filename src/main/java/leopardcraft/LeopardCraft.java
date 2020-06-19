@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.BlockItem;
@@ -38,13 +40,15 @@ public class LeopardCraft {
     private static BlockItem mapleLogItem;
     private static Block mapleLeavesBlock;
     private static BlockItem mapleLeavesItem;
-    private static Item sapBottleItem;
+    public static Item sapBottleItem;
     private static Item syrupBottleItem;
     private static SapTapperBlock sapTapperBlock;
     private static BlockItem sapTapperItem;
     private static Item batter;
     private static Item pancake;
     private static Item pancakeWithSyrup;
+    private static Block mapleSaplingBlock;
+    private static BlockItem mapleSaplingItem;
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
@@ -87,6 +91,10 @@ public class LeopardCraft {
         pancakeWithSyrup.setRegistryName("pancake_with_syrup");
         batter = new Item(new Item.Properties().group(ItemGroup.MISC));
         batter.setRegistryName("batter");
+        mapleSaplingBlock = new Block(Block.Properties.from(Blocks.JUNGLE_SAPLING));
+        mapleSaplingBlock.setRegistryName("maple_sapling");
+        mapleSaplingItem = new BlockItem(mapleSaplingBlock, new Item.Properties().group(ItemGroup.DECORATIONS));
+        mapleSaplingItem.setRegistryName("maple_sapling");
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -131,13 +139,13 @@ public class LeopardCraft {
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            blockRegistryEvent.getRegistry().registerAll(mapleLogBlock, mapleLeavesBlock, sapTapperBlock);
+            blockRegistryEvent.getRegistry().registerAll(mapleLogBlock, mapleLeavesBlock, sapTapperBlock, mapleSaplingBlock);
             LOGGER.info("Successfully registered LeopardCraft blocks!");
         }
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
-            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter);
+            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem);
             LOGGER.info("Successfully registered LeopardCraft items!");
         }
     }

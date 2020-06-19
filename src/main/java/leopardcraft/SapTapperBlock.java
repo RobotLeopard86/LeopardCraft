@@ -6,22 +6,28 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer.Builder;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 
 public class SapTapperBlock extends Block {
-	
 	
 	enum TankStates implements IStringSerializable {
 		EMPTY("empty"),
@@ -68,6 +74,33 @@ public class SapTapperBlock extends Block {
 		this.getStateContainer().getBaseState().with(tankState, TankStates.EMPTY).with(facing, Direction.NORTH);
 		this.setRegistryName("sap_tapper");
 	}
+	
+	@Override
+	public ActionResultType func_225533_a_(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (!worldIn.isRemote) {
+			BlockPos facingLog = null;
+		      if(player.getHeldItemMainhand().isItemEqual(new ItemStack(Items.GLASS_BOTTLE))) {
+		    	 player.setHeldItem(Hand.MAIN_HAND, new ItemStack(LeopardCraft.sapBottleItem));
+		    	 switch(state.get(facing)) {
+		    	 case NORTH:
+		    		 facingLog = pos.north();
+		    		 break;
+		    	 case EAST:
+		    		 facingLog = pos.east();
+		    		 break;
+		    	 case SOUTH:
+		    		 facingLog = pos.south();
+		    		 break;
+		    	 case WEST:
+		    		 facingLog = pos.west();
+		    		 break;
+		    	 }
+		    	 
+		      }
+		    }
+		    return ActionResultType.SUCCESS;
+	}
+	 
 	
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {

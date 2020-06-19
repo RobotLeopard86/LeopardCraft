@@ -14,7 +14,7 @@ public class MapleLog extends DirectionalBlock {
 	public MapleLog(Properties properties) {
 		super(properties);
 		setDefaultState(stateContainer.getBaseState().with(axisProperty, Direction.Axis.Y).with(sapState, 3));
-		 
+		
 	}
 	
 	@Override

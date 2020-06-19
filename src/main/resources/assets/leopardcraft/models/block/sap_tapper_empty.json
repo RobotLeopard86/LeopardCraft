@@ -2,7 +2,8 @@
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
         "0": "leopardcraft:block/sap_tapper_material",
-        "1": "leopardcraft:block/sap_tapper_material"
+        "1": "leopardcraft:block/sap_tapper_material",
+        "particle": "#0"
     },
     "elements": [
         {
