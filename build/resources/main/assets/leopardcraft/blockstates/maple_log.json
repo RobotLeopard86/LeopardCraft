@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "axis=y,sap=3":  { "model": "leopardcraft:block/iii_maple_log" },
+        "axis=z,sap=3":   { "model": "leopardcraft:block/iii_maple_log", "x": 90 },
+        "axis=x,sap=3":   { "model": "leopardcraft:block/iii_maple_log", "x": 90, "y": 90 },
+        "axis=y,sap=2":  { "model": "leopardcraft:block/ii_maple_log" },
+        "axis=z,sap=2":   { "model": "leopardcraft:block/ii_maple_log", "x": 90 },
+        "axis=x,sap=2":   { "model": "leopardcraft:block/ii_maple_log", "x": 90, "y": 90 },
+        "axis=y,sap=1":  { "model": "leopardcraft:block/i_maple_log" },
+        "axis=z,sap=1":   { "model": "leopardcraft:block/i_maple_log", "x": 90 },
+        "axis=x,sap=1":   { "model": "leopardcraft:block/i_maple_log", "x": 90, "y": 90 },
+        "axis=y,sap=0":  { "model": "leopardcraft:block/no_sap_maple_log" },
+        "axis=z,sap=0":   { "model": "leopardcraft:block/no_sap_maple_log", "x": 90 },
+        "axis=x,sap=0":   { "model": "leopardcraft:block/no_sap_maple_log", "x": 90, "y": 90 }
+    }
+}

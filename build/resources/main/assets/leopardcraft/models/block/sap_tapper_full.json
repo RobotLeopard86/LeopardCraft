@@ -1,0 +1,6 @@
+{
+    "parent": "leopardcraft:block/sap_tapper_empty",
+    "textures": {
+        "1": "leopardcraft:block/sap_tapper_full_tank_material"
+    }
+}

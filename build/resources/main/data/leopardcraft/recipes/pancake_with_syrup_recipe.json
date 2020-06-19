@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "leopardcraft:syrup_bottle"
+        },
+        {
+            "item": "leopardcraft:pancake"
+        }
+    ],
+    "result": {
+        "item": "leopardcraft:pancake_with_syrup"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " i>",
+        " I ",
+        "i+i"
+    ],
+    "key": {
+        "i": {
+            "item": "minecraft:iron_ingot"
+        },
+        "I": {
+            "item": "minecraft:iron_block"
+        },
+        ">": {
+            "item": "minecraft:shears"
+        },
+        "+": {
+            "item": "minecraft:iron_bars"
+        }
+    },
+    "result": {
+        "item": "leopardcraft:sap_tapper"
+    }
+}

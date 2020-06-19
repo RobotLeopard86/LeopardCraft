@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: LeopardCraft
+Specification-Vendor: RobotLeopard86
+Specification-Version: 1
+Implementation-Title: LeopardCraft
+Implementation-Version: 0.1.0
+Implementation-Vendor: RobotLeopard86
+Implementation-Timestamp: 2020-06-13T10:36:42-0500
+

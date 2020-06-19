@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "leopardcraft:batter"
+    },
+    "result": "leopardcraft:pancake",
+    "experience": 0
+}

@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "tank=empty,facing=north": {"model": "leopardcraft:block/sap_tapper_empty"},
+        "tank=empty,facing=east": {"model": "leopardcraft:block/sap_tapper_empty", "y": 90},
+        "tank=empty,facing=south": {"model": "leopardcraft:block/sap_tapper_empty", "y": 180},
+        "tank=empty,facing=west": {"model": "leopardcraft:block/sap_tapper_empty", "y": 270},
+        "tank=full,facing=north": {"model": "leopardcraft:block/sap_tapper_full"},
+        "tank=full,facing=east": {"model": "leopardcraft:block/sap_tapper_full", "y": 90},
+        "tank=full,facing=south": {"model": "leopardcraft:block/sap_tapper_full", "y": 180},
+        "tank=full,facing=west": {"model": "leopardcraft:block/sap_tapper_full", "y": 270}
+    }
+}
