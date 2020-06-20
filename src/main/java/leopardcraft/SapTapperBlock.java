@@ -1,7 +1,5 @@
 package leopardcraft;
 
-import com.google.common.collect.ImmutableMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -12,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
-import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -77,28 +74,11 @@ public class SapTapperBlock extends Block {
 	
 	@Override
 	public ActionResultType func_225533_a_(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote) {
-			BlockPos facingLog = null;
-		      if(player.getHeldItemMainhand().isItemEqual(new ItemStack(Items.GLASS_BOTTLE))) {
-		    	 player.setHeldItem(Hand.MAIN_HAND, new ItemStack(LeopardCraft.sapBottleItem));
-		    	 switch(state.get(facing)) {
-		    	 case NORTH:
-		    		 facingLog = pos.north();
-		    		 break;
-		    	 case EAST:
-		    		 facingLog = pos.east();
-		    		 break;
-		    	 case SOUTH:
-		    		 facingLog = pos.south();
-		    		 break;
-		    	 case WEST:
-		    		 facingLog = pos.west();
-		    		 break;
-		    	 }
-		    	 
-		      }
-		    }
-		    return ActionResultType.SUCCESS;
+		if(!worldIn.isRemote && player.getHeldItem(handIn).getItem() == Items.GLASS_BOTTLE && state.get(tankState) == TankStates.FULL) {
+			player.setHeldItem(handIn, new ItemStack(LeopardCraft.sapBottleItem));
+			worldIn.getWorld().setBlockState(pos, stateContainer.getBaseState().with(facing, state.get(facing)).with(tankState, TankStates.EMPTY));
+		}
+		return ActionResultType.SUCCESS;
 	}
 	 
 	
@@ -144,19 +124,6 @@ public class SapTapperBlock extends Block {
 	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return super.getRaytraceShape(state, worldIn, pos);
 	}
-	
-	public class SapTapperBlockstate extends BlockState {
-
-		public SapTapperBlockstate(Block blockIn, ImmutableMap<IProperty<?>, Comparable<?>> properties) {
-			super(blockIn, properties);
-		}
-
-		@Override
-		public boolean isOpaqueCube(IBlockReader worldIn, BlockPos pos) {
-			return false;
-		}
-
-	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
@@ -177,6 +144,8 @@ public class SapTapperBlock extends Block {
 			case WEST:
 				facingBlock = context.getPos().west();
 				break;
+		default:
+			break;
 		}
 		if(facingBlock == null || context.getWorld().getBlockState(facingBlock).getBlock().getClass() != MapleLog.class ){
 			return null;
