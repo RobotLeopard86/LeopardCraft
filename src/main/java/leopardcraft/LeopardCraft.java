@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,7 +42,7 @@ public class LeopardCraft {
     private static BlockItem mapleLeavesItem;
     public static Item sapBottleItem;
     private static Item syrupBottleItem;
-    private static SapTapperBlock sapTapperBlock;
+    public static SapTapperBlock sapTapperBlock;
     private static BlockItem sapTapperItem;
     private static Item batter;
     private static Item pancake;
@@ -146,6 +147,12 @@ public class LeopardCraft {
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
             itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem);
             LOGGER.info("Successfully registered LeopardCraft items!");
+        }
+        
+        @SubscribeEvent
+        public static void onTileEntitiesRegistry(final RegistryEvent.Register<TileEntityType<?>> teRegisterEvent) {
+        	teRegisterEvent.getRegistry().register(SapTapperTileEntity.getTileEntityType());
+        	LOGGER.info("Sucessfully registered LeopardCraft tile entities!");
         }
     }
 }
