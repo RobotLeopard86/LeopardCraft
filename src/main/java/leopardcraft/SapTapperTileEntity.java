@@ -69,7 +69,7 @@ public class SapTapperTileEntity extends TileEntity implements ITickableTileEnti
 	
 	public boolean allowedToTap() {
 		BlockPos facingLog = getFacingBlock();
-		if(this.getBlockState().get(SapTapperBlock.tankState) == SapTapperBlock.TankStates.EMPTY) {
+		if(this.getBlockState().get(SapTapperBlock.tankState) == SapTapperBlock.TankStates.EMPTY && this.getWorld().getBlockState(facingLog).getBlock().getClass() == MapleLog.class) {
 			return this.getWorld().getBlockState(facingLog).get(MapleLog.sapState) >= 1;
 		}
 		return false;

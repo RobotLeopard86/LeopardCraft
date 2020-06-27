@@ -5,7 +5,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.world.IBlockReader;
 
 public class MapleLog extends DirectionalBlock {
 
@@ -29,6 +31,15 @@ public class MapleLog extends DirectionalBlock {
 		return stateContainer.getBaseState().with(sapState, 3);
 
 	}
-   
+	
+	@Override
+	public boolean hasTileEntity(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return new MapleLogTileEntity();
+	}
 	
 }
