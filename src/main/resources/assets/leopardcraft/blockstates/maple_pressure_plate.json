@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=false": { "model": "leopardcraft:/block/maple_pressure_plate" },
+        "powered=true": { "model": "leopardcraft:/block/maple_pressure_plate_down" }
+    }
+}
