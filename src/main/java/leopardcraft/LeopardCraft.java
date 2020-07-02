@@ -9,12 +9,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.WallSignBlock;
-import net.minecraft.block.WoodButtonBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Foods;
@@ -24,6 +26,7 @@ import net.minecraft.item.SignItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -54,7 +57,7 @@ public class LeopardCraft {
     private static Item batter;
     private static Item pancake;
     private static Item pancakeWithSyrup;
-    public static Block mapleSaplingBlock;
+    public static MapleSapling mapleSaplingBlock;
     private static BlockItem mapleSaplingItem;
     public static Block maplePlanksBlock;
     private static SlabBlock mapleSlabBlock;
@@ -65,9 +68,9 @@ public class LeopardCraft {
     private static WallSignBlock mapleSignWall;
     private static MaplePressurePlate maplePressurePlate;
     private static MapleButtonBlock mapleButton;
-    private static DirectionalBlock strippedMapleLog;
-    private static DirectionalBlock mapleWoodBlock;
-    private static DirectionalBlock strippedMapleWood;
+    public static DirectionalBlock strippedMapleLog;
+    private static MapleWood mapleWoodBlock;
+    public static DirectionalBlock strippedMapleWood;
     private static FenceBlock mapleFence;
     private static FenceGateBlock mapleFenceGate;
     private static BlockItem maplePlanksItem;
@@ -134,8 +137,7 @@ public class LeopardCraft {
         batter = new Item(new Item.Properties().group(ItemGroup.MISC));
         batter.setRegistryName("batter");
         LOGGER.info("Maple Eats: " + pancake.getRegistryName() + " (this one with syrup): " + pancakeWithSyrup.getRegistryName() + " and batter now: " + batter.getRegistryName());
-        mapleSaplingBlock = new Block(Block.Properties.from(Blocks.JUNGLE_SAPLING));
-        mapleSaplingBlock.setRegistryName("maple_sapling");
+        mapleSaplingBlock = new MapleSapling();
         LOGGER.info("Maple Sapling: " + mapleSaplingBlock.getRegistryName());
         mapleSaplingItem = new BlockItem(mapleSaplingBlock, new Item.Properties().group(ItemGroup.DECORATIONS));
         mapleSaplingItem.setRegistryName("maple_sapling");
@@ -165,7 +167,7 @@ public class LeopardCraft {
         strippedMapleLog = new DirectionalBlock(Block.Properties.from(mapleLogBlock));
         strippedMapleLog.setRegistryName("stripped_maple_log");
         LOGGER.info("Stripped Maple Log: " + strippedMapleLog.getRegistryName());
-        mapleWoodBlock = new DirectionalBlock(Block.Properties.from(Blocks.JUNGLE_WOOD));
+        mapleWoodBlock = new MapleWood(Block.Properties.from(Blocks.JUNGLE_WOOD));
         mapleWoodBlock.setRegistryName("maple_wood");
         LOGGER.info("Maple Wood: " + mapleWoodBlock.getRegistryName());
         strippedMapleWood = new DirectionalBlock(Block.Properties.from(mapleWoodBlock));
@@ -227,6 +229,10 @@ public class LeopardCraft {
 
 
     }
+    
+    public static <T extends Entity> EntityType<T> register(String key, EntityType.Builder<T> builder) {
+        return Registry.register(Registry.ENTITY_TYPE, key, builder.build(key));
+     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
@@ -267,7 +273,7 @@ public class LeopardCraft {
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
-            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem);
+            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem );
             LOGGER.info("Successfully registered LeopardCraft items!");
         }
         
