@@ -1,5 +1,8 @@
-package leopardcraft;
+package leopardcraft.block;
 
+import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.LeopardCraftHelpers;
+import leopardcraft.te.SapTapperTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -27,7 +30,7 @@ import net.minecraft.world.World;
 
 public class SapTapperBlock extends Block {
 	
-	enum TankStates implements IStringSerializable {
+	public enum TankStates implements IStringSerializable {
 		EMPTY("empty"),
 		FULL("full");
 
@@ -45,8 +48,8 @@ public class SapTapperBlock extends Block {
 	}
 	
 	
-	static final EnumProperty<TankStates> tankState = EnumProperty.create("tank", TankStates.class);
-	static final DirectionProperty facing = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
+	public static final EnumProperty<TankStates> tankState = EnumProperty.create("tank", TankStates.class);
+	public static final DirectionProperty facing = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 	private static final Vec3d TUBE_MIN_CORNER = new Vec3d(7.0, 5.0, 0.0);
 	private static final Vec3d TUBE_MAX_CORNER = new Vec3d(9.0, 6.0, 13.0);
 	private static final Vec3d FAUCET_MIN_CORNER = new Vec3d(6.0, 6.0, 9.0);

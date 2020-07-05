@@ -1,25 +1,28 @@
-package leopardcraft;
+package leopardcraft.entity;
 
 import java.util.UUID;
 
+import leopardcraft.base.LeopardCraft;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.DyeColor;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class LeopardEntity extends TameableEntity {
 	public static final EntityType<LeopardEntity> LEOPARD = LeopardCraft.register("leopard", EntityType.Builder.create(LeopardEntity::new, EntityClassification.CREATURE).size(1.4F, 1.4F));
+	
+	public static EntityType<LeopardEntity> getEntityType() {
+		return LEOPARD;
+		
+	}
 	
 	public LeopardEntity(EntityType<? extends LeopardEntity> type, World worldIn) {
 		super(type, worldIn);

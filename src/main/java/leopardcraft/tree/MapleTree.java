@@ -1,7 +1,8 @@
-package leopardcraft;
+package leopardcraft.tree;
 
 import java.util.Random;
 
+import leopardcraft.base.LeopardCraft;
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -14,7 +15,7 @@ public class MapleTree extends Tree {
 	public static final TreeFeatureConfig MAPLE_TREE_CONFIG = new TreeFeatureConfig.Builder(
 			new SimpleBlockStateProvider(LeopardCraft.mapleLogBlock.getDefaultState()),
 			new SimpleBlockStateProvider(LeopardCraft.mapleLeavesBlock.getDefaultState()),
-			new BlobFoliagePlacer(1,1)).func_225569_d_(7).func_227354_b_(-1).func_227360_i_(1).func_227352_a_().setSapling((IPlantable) LeopardCraft.mapleSaplingBlock).func_225568_b_();//.baseHeight(6).heightRandA(5) .foliageHeight(1).ignoreVines().build();
+			new BlobFoliagePlacer(1,1)).func_225569_d_(7).func_227354_b_(0).func_227360_i_(1).func_227352_a_().setSapling((IPlantable) LeopardCraft.mapleSaplingBlock).func_225568_b_();//.baseHeight(6).heightRandA(5) .foliageHeight(1).ignoreVines().build();
 	public static final TreeFeatureConfig MAPLE_TREE_CONFIG_OTHER = new TreeFeatureConfig.Builder(
 			new SimpleBlockStateProvider(LeopardCraft.mapleLogBlock.getDefaultState()),
 			new SimpleBlockStateProvider(LeopardCraft.mapleLeavesBlock.getDefaultState()),

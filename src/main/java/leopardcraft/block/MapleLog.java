@@ -1,5 +1,7 @@
-package leopardcraft;
+package leopardcraft.block;
 
+import leopardcraft.base.LeopardCraft;
+import leopardcraft.te.MapleLogTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +20,7 @@ import net.minecraft.world.World;
 
 public class MapleLog extends DirectionalBlock {
 
-	static final IntegerProperty sapState = IntegerProperty.create("sap", 0, 3);
+	public static final IntegerProperty sapState = IntegerProperty.create("sap", 0, 3);
 	
 	public MapleLog(Properties properties) {
 		super(properties);

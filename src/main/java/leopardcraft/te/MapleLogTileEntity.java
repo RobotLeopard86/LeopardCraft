@@ -1,8 +1,10 @@
-package leopardcraft;
+package leopardcraft.te;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import leopardcraft.base.LeopardCraft;
+import leopardcraft.block.MapleLog;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;

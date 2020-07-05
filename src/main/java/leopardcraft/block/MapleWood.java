@@ -1,5 +1,6 @@
-package leopardcraft;
+package leopardcraft.block;
 
+import leopardcraft.base.LeopardCraft;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;

@@ -1,15 +1,28 @@
-package leopardcraft;
+package leopardcraft.base;
 
 import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import leopardcraft.block.DirectionalBlock;
+import leopardcraft.block.MapleButtonBlock;
+import leopardcraft.block.MapleDoor;
+import leopardcraft.block.MapleLog;
+import leopardcraft.block.MaplePressurePlate;
+import leopardcraft.block.MapleSapling;
+import leopardcraft.block.MapleStairs;
+import leopardcraft.block.MapleTrapdoor;
+import leopardcraft.block.MapleWood;
+import leopardcraft.block.SapTapperBlock;
+import leopardcraft.entity.LeopardEntity;
+import leopardcraft.te.MapleLogTileEntity;
+import leopardcraft.te.SapTapperTileEntity;
+import leopardcraft.tree.MapleTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.WallSignBlock;
@@ -27,6 +40,12 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -89,6 +108,10 @@ public class LeopardCraft {
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
+    //Get entity types
+    private static EntityType<LeopardEntity> leopardType;
+    
+    
     public LeopardCraft() {
         LOGGER.info("Welcome to LeopardCraft!");
 
@@ -219,6 +242,8 @@ public class LeopardCraft {
         strippedMapleWoodItem = new BlockItem(strippedMapleWood, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         strippedMapleWoodItem.setRegistryName("stripped_maple_wood");
         LOGGER.info("Stripped Maple Wood: " + strippedMapleWoodItem.getRegistryName());
+        //Create value of entity types
+        leopardType = LeopardEntity.getEntityType();
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -226,12 +251,25 @@ public class LeopardCraft {
         // some preinit code ( just for looks, these log statements are )
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("PANCAKES...YUM >> {}", pancake.getRegistryName());
-
-
+        addMapleTrees(Biomes.TAIGA);
+        addMapleTrees(Biomes.TAIGA_HILLS);
+        addMapleTrees(Biomes.TAIGA_MOUNTAINS);
+        addMapleTrees(Biomes.SNOWY_TAIGA);
+        addMapleTrees(Biomes.SNOWY_TAIGA_HILLS);
+        addMapleTrees(Biomes.SNOWY_TAIGA_MOUNTAINS);
+        addMapleTrees(Biomes.GIANT_SPRUCE_TAIGA);
+        addMapleTrees(Biomes.GIANT_SPRUCE_TAIGA_HILLS);
+        addMapleTrees(Biomes.GIANT_TREE_TAIGA_HILLS);
+        addMapleTrees(Biomes.GIANT_TREE_TAIGA_HILLS);
+        LOGGER.info("Sucessfully added maple trees to taiga biomes!");
+    }
+    
+    public static void addMapleTrees(Biome biomeIn) {
+        biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.NORMAL_TREE.func_225566_b_(MapleTree.MAPLE_TREE_CONFIG).func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(10, 0.1F, 1))));
     }
     
     public static <T extends Entity> EntityType<T> register(String key, EntityType.Builder<T> builder) {
-        return Registry.register(Registry.ENTITY_TYPE, key, builder.build(key));
+        return Registry.register(Registry.ENTITY_TYPE, "leopardcraft:" + key, builder.build(key));
      }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -282,6 +320,12 @@ public class LeopardCraft {
         	teRegisterEvent.getRegistry().register(SapTapperTileEntity.getTileEntityType());
         	teRegisterEvent.getRegistry().register(MapleLogTileEntity.getTileEntityType());
         	LOGGER.info("Sucessfully registered LeopardCraft tile entities!");
+        }
+        
+        @SubscribeEvent
+        public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
+        	entityRegistryEvent.getRegistry().register(LeopardEntity.getEntityType());
+        	LOGGER.info("Sucessfully registered LeopardCraft entities!");
         }
     }
 }

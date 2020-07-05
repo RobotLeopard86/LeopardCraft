@@ -1,4 +1,4 @@
-package leopardcraft;
+package leopardcraft.tree;
 
 import net.minecraft.block.WoodType;
 

@@ -1,5 +1,6 @@
-package leopardcraft;
+package leopardcraft.block;
 
+import leopardcraft.base.LeopardCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.StairsBlock;

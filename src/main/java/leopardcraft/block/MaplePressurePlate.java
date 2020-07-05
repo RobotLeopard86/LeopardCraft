@@ -1,4 +1,4 @@
-package leopardcraft;
+package leopardcraft.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

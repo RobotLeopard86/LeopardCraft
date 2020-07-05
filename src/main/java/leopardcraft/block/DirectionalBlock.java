@@ -1,4 +1,4 @@
-package leopardcraft;
+package leopardcraft.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -17,7 +17,7 @@ public class DirectionalBlock extends Block {
     
 	
 	//Variables go here
-    static final EnumProperty<Direction.Axis> axisProperty = EnumProperty.create("axis",Direction.Axis.class);
+    public static final EnumProperty<Direction.Axis> axisProperty = EnumProperty.create("axis",Direction.Axis.class);
 
     
     //Constructor

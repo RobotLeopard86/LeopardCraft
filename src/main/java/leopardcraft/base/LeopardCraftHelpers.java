@@ -1,4 +1,4 @@
-package leopardcraft;
+package leopardcraft.base;
 
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.shapes.VoxelShape;
