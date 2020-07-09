@@ -16,9 +16,11 @@ import leopardcraft.block.MapleTrapdoor;
 import leopardcraft.block.MapleWood;
 import leopardcraft.block.SapTapperBlock;
 import leopardcraft.entity.LeopardEntity;
+import leopardcraft.entity.render.LeopardEntityRender;
 import leopardcraft.te.MapleLogTileEntity;
 import leopardcraft.te.SapTapperTileEntity;
 import leopardcraft.tree.MapleTree;
+import leopardcraft.biome.LeopardCraftBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
@@ -39,6 +41,7 @@ import net.minecraft.item.SignItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -50,6 +53,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -70,12 +74,12 @@ public class LeopardCraft {
     public static Block mapleLeavesBlock;
     private static BlockItem mapleLeavesItem;
     public static Item sapBottleItem;
-    private static Item syrupBottleItem;
+    public static Item syrupBottleItem;
     public static SapTapperBlock sapTapperBlock;
     private static BlockItem sapTapperItem;
     private static Item batter;
-    private static Item pancake;
-    private static Item pancakeWithSyrup;
+    public static Item pancake;
+    public static Item pancakeWithSyrup;
     public static MapleSapling mapleSaplingBlock;
     private static BlockItem mapleSaplingItem;
     public static Block maplePlanksBlock;
@@ -108,8 +112,8 @@ public class LeopardCraft {
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
-    //Get entity types
-    private static EntityType<LeopardEntity> leopardType;
+    //Create Mod Id
+    public static String ModId = "leopardcraft";
     
     
     public LeopardCraft() {
@@ -242,8 +246,6 @@ public class LeopardCraft {
         strippedMapleWoodItem = new BlockItem(strippedMapleWood, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         strippedMapleWoodItem.setRegistryName("stripped_maple_wood");
         LOGGER.info("Stripped Maple Wood: " + strippedMapleWoodItem.getRegistryName());
-        //Create value of entity types
-        leopardType = LeopardEntity.getEntityType();
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -270,13 +272,13 @@ public class LeopardCraft {
     
     public static <T extends Entity> EntityType<T> register(String key, EntityType.Builder<T> builder) {
         return Registry.register(Registry.ENTITY_TYPE, "leopardcraft:" + key, builder.build(key));
-     }
+    }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         minecraft = event.getMinecraftSupplier().get();
         LOGGER.info("Got game settings {}", minecraft.gameSettings);
-
+        RenderingRegistry.registerEntityRenderingHandler(LeopardEntity.getEntityType(), LeopardEntityRender::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -317,8 +319,7 @@ public class LeopardCraft {
         
         @SubscribeEvent
         public static void onTileEntitiesRegistry(final RegistryEvent.Register<TileEntityType<?>> teRegisterEvent) {
-        	teRegisterEvent.getRegistry().register(SapTapperTileEntity.getTileEntityType());
-        	teRegisterEvent.getRegistry().register(MapleLogTileEntity.getTileEntityType());
+        	teRegisterEvent.getRegistry().registerAll(SapTapperTileEntity.getTileEntityType(), MapleLogTileEntity.getTileEntityType());
         	LOGGER.info("Sucessfully registered LeopardCraft tile entities!");
         }
         
@@ -326,6 +327,11 @@ public class LeopardCraft {
         public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
         	entityRegistryEvent.getRegistry().register(LeopardEntity.getEntityType());
         	LOGGER.info("Sucessfully registered LeopardCraft entities!");
+        }
+        
+        @SubscribeEvent
+        public static void onBiomesRegistry(final RegistryEvent.Register<Biome> biomeRegistryEvent) {
+        	biomeRegistryEvent.getRegistry().registerAll(LeopardCraftBiomes.LEOPARD_SAVANNA, LeopardCraftBiomes.LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA_PLATEAU);
         }
     }
 }

@@ -36,8 +36,7 @@ public class MapleLog extends DirectionalBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return stateContainer.getBaseState().with(sapState, 3);
-
+		return super.placementStateGetter(context, true);
 	}
 	
 	@Override

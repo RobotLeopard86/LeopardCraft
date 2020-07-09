@@ -18,6 +18,4 @@ public class LeopardCraftHelpers {
 		}
 		return buffer[0];
 	}
-
-	
 }

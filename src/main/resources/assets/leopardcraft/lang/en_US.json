@@ -37,5 +37,9 @@
     "item.leopardcraft.maple_slab": "Maple Slab",
     "block.leopardcraft.maple_stairs": "Maple Stairs",
     "item.leopardcraft.maple_stairs": "Maple Stairs",
-    "entity.leopardcraft.leopard": "Leopard"
+    "entity.leopardcraft.leopard": "Leopard",
+    "biome.leopardcraft.leopard_savanna": "Leopard Savanna",
+    "biome.leopardcraft.leopard_savanna_plateau": "Leopard Savanna Plateau",
+    "biome.leopardcraft.shattered_leopard_savanna": "Shattered Leopard Savanna",
+    "biome.leopardcraft.shattered_leopard_savanna_plateau": "Shattered Leopard Savanna Plateau"
 }

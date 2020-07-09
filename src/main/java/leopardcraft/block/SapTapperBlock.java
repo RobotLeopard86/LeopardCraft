@@ -160,6 +160,28 @@ public class SapTapperBlock extends Block {
 		default:
 			break;
 		}
+		switch(context.getNearestLookingDirection()) {
+			case NORTH:
+				if(context.getWorld().getBlockState(facingBlock.north()).getBlock().getClass() == SapTapperBlock.class || context.getWorld().getBlockState(facingBlock.west()).getBlock().getClass() == SapTapperBlock.class || context.getWorld().getBlockState(facingBlock.east()).getBlock().getClass() == SapTapperBlock.class) {
+					return null;
+				}
+				break;
+			case SOUTH:
+				if(context.getWorld().getBlockState(facingBlock.south()).getBlock().getClass() == SapTapperBlock.class || context.getWorld().getBlockState(facingBlock.west()).getBlock().getClass() == SapTapperBlock.class || context.getWorld().getBlockState(facingBlock.east()).getBlock().getClass() == SapTapperBlock.class) {
+					return null;
+				}
+				break;
+			case WEST:
+				if(context.getWorld().getBlockState(facingBlock.south()).getBlock().getClass() == SapTapperBlock.class || context.getWorld().getBlockState(facingBlock.north()).getBlock().getClass() == SapTapperBlock.class || context.getWorld().getBlockState(facingBlock.east()).getBlock().getClass() == SapTapperBlock.class) {
+					return null;
+				}
+				break;
+			case EAST:
+				if(context.getWorld().getBlockState(facingBlock.south()).getBlock().getClass() == SapTapperBlock.class || context.getWorld().getBlockState(facingBlock.west()).getBlock().getClass() == SapTapperBlock.class || context.getWorld().getBlockState(facingBlock.north()).getBlock().getClass() == SapTapperBlock.class) {
+					return null;
+				}
+				break;
+		}
 		if(facingBlock == null || context.getWorld().getBlockState(facingBlock).getBlock().getClass() != MapleLog.class ){
 			return null;
 		}

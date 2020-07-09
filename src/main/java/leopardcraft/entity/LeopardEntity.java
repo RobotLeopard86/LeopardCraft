@@ -6,14 +6,26 @@ import leopardcraft.base.LeopardCraft;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class LeopardEntity extends TameableEntity {
@@ -38,7 +50,14 @@ public class LeopardEntity extends TameableEntity {
 			leopardentity.setTamed(true);
 		}
 		
+		leopardentity.onInitialSpawn(this.world, this.world.getDifficultyForLocation(new BlockPos(leopardentity)), SpawnReason.BREEDING, (ILivingEntityData)null, (CompoundNBT)null);
+		
 		return leopardentity;
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack stack) {
+		return stack.getItem() == LeopardCraft.syrupBottleItem || stack.getItem() == LeopardCraft.pancake || stack.getItem() == LeopardCraft.pancakeWithSyrup;
 	}
 	
 	public boolean processInteract(PlayerEntity player, Hand hand) {
@@ -47,10 +66,10 @@ public class LeopardEntity extends TameableEntity {
 	      if (itemstack.getItem() instanceof SpawnEggItem) {
 	         return super.processInteract(player, hand);
 	      } else if (this.world.isRemote) {
-	         return this.isOwner(player) || item.getFood().isMeat();
+	         return this.isOwner(player) || item.getItem() == LeopardCraft.syrupBottleItem || item.getItem() == LeopardCraft.pancake || item.getItem() == LeopardCraft.pancakeWithSyrup;
 	      } else {
 	         if (this.isTamed()) {
-	            if (item.isFood() && item.getFood().isMeat() && this.getHealth() < this.getMaxHealth()) {
+	            if (item.isFood() && item.getItem() == LeopardCraft.syrupBottleItem || item.getItem() == LeopardCraft.pancake || item.getItem() == LeopardCraft.pancakeWithSyrup && this.getHealth() < this.getMaxHealth()) {
 	               if (!player.abilities.isCreativeMode) {
 	                  itemstack.shrink(1);
 	               }
@@ -59,22 +78,7 @@ public class LeopardEntity extends TameableEntity {
 	               return true;
 	            }
 
-	            if (!(item instanceof DyeItem)) {
-	               boolean flag = super.processInteract(player, hand);
-	               if (!flag || this.isChild()) {
-	                  this.sitGoal.setSitting(!this.isSitting());
-	               }
-
-	               return flag;
-	            }
-
-	            if (this.isOwner(player) && !this.isBreedingItem(itemstack)) {
-	               this.sitGoal.setSitting(!this.isSitting());
-	               this.isJumping = false;
-	               this.navigator.clearPath();
-	               this.setAttackTarget((LivingEntity)null);
-	            }
-	         } else if (item.getFood().isMeat()) {
+	         } else if (item.getItem() == LeopardCraft.syrupBottleItem || item.getItem() == LeopardCraft.pancake || item.getItem() == LeopardCraft.pancakeWithSyrup) {
 	            if (!player.abilities.isCreativeMode) {
 	               itemstack.shrink(1);
 	            }
@@ -94,8 +98,26 @@ public class LeopardEntity extends TameableEntity {
 
 	         return super.processInteract(player, hand);
 	      }
-	   }
+	}
+
+	@Override
+	protected void registerGoals() {
+		super.registerGoals();
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.fromItems(LeopardCraft.syrupBottleItem, LeopardCraft.pancake, LeopardCraft.pancakeWithSyrup), false));
+		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
+		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+	}
+
+	@Override
+	protected void registerAttributes() {
+		super.registerAttributes();
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(28.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.43D);
+	}
 	
-	
-	
+		
 }
