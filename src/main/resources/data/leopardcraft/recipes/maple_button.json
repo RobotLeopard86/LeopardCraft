@@ -1,0 +1,11 @@
+{
+	"parent": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "leopardcraft:maple_planks"
+		}
+	],
+	"result": {
+		"item": "leopardcraft:maple_button"
+	}
+}
