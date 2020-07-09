@@ -11,6 +11,7 @@
 		}
 	},
 	"result": {
-		"item": "leopardcraft:maple_stairs"
+		"item": "leopardcraft:maple_stairs",
+		"count": 4
 	}
 }

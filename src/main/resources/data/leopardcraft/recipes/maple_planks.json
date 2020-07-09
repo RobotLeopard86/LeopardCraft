@@ -1,11 +1,13 @@
 {
 	"parent": "minecraft:crafting_shapeless",
+	"group": "planks",
 	"ingredients": [
 		{
-			"item": "leopardcraft:maple_planks"
+			"tag": "leopardcraft:maple_logs"
 		}
 	],
 	"result": {
-		"item": "leopardcraft:maple_planks"
+		"item": "leopardcraft:maple_planks",
+		"count": 4
 	}
 }

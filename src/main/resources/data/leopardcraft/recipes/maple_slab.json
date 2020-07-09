@@ -11,6 +11,7 @@
 		}
 	},
 	"result": {
-		"item": "leopardcraft:maple_slab"
+		"item": "leopardcraft:maple_slab",
+		"count": 6
 	}
 }
