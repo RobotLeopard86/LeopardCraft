@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "leopardcraft:/block/maple_sign" }
+        "": { "model": "leopardcraft:block/maple_sign" }
     }
 }

@@ -17,7 +17,9 @@ import leopardcraft.block.MapleTrapdoor;
 import leopardcraft.block.MapleWood;
 import leopardcraft.block.SapTapperBlock;
 import leopardcraft.entity.LeopardEntity;
+import leopardcraft.entity.SnakeEntity;
 import leopardcraft.entity.render.LeopardEntityRender;
+import leopardcraft.entity.render.SnakeEntityRender;
 import leopardcraft.te.MapleLogTileEntity;
 import leopardcraft.te.SapTapperTileEntity;
 import leopardcraft.tree.MapleTree;
@@ -110,6 +112,8 @@ public class LeopardCraft {
     private static BlockItem mapleFenceItem;
     private static BlockItem mapleFenceGateItem;
     private static SpawnEggItem leopardSpawnEgg;
+    private static SpawnEggItem snakeSpawnEgg;
+    private static Item snakeSkin;
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
@@ -250,6 +254,10 @@ public class LeopardCraft {
         leopardSpawnEgg = new SpawnEggItem(LeopardEntity.getEntityType(), 15585032, 0, new Item.Properties().group(ItemGroup.MISC));
         leopardSpawnEgg.setRegistryName("leopard_spawn_egg");
         LOGGER.info("Leopard Spawn Egg: " + leopardSpawnEgg.getRegistryName());
+        snakeSpawnEgg = new SpawnEggItem(SnakeEntity.SNAKE, 894731, 8978176, new Item.Properties().group(ItemGroup.MISC));
+        snakeSpawnEgg.setRegistryName("snake_spawn_egg");
+        snakeSkin = new Item(new Item.Properties().group(ItemGroup.MISC).maxStackSize(16));
+        snakeSkin.setRegistryName("snakeskin");
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -283,6 +291,7 @@ public class LeopardCraft {
         minecraft = event.getMinecraftSupplier().get();
         LOGGER.info("Got game settings {}", minecraft.gameSettings);
         RenderingRegistry.registerEntityRenderingHandler(LeopardEntity.getEntityType(), LeopardEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(SnakeEntity.SNAKE, SnakeEntityRender::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -311,13 +320,15 @@ public class LeopardCraft {
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            blockRegistryEvent.getRegistry().registerAll(mapleLogBlock, mapleLeavesBlock, sapTapperBlock, mapleSaplingBlock, maplePlanksBlock, mapleSlabBlock, mapleStairsBlock, mapleTrapdoorBlock, mapleDoorBlock, mapleSignStanding, mapleSignWall, maplePressurePlate, mapleButton, mapleWoodBlock, strippedMapleLog, strippedMapleWood, mapleFence, mapleFenceGate);
+            blockRegistryEvent.getRegistry().registerAll(mapleLogBlock, mapleLeavesBlock, sapTapperBlock, mapleSaplingBlock, maplePlanksBlock, mapleSlabBlock, mapleStairsBlock, mapleTrapdoorBlock, mapleDoorBlock,
+            mapleSignStanding, mapleSignWall, maplePressurePlate, mapleButton, mapleWoodBlock, strippedMapleLog, strippedMapleWood, mapleFence, mapleFenceGate);
             LOGGER.info("Successfully registered LeopardCraft blocks!");
         }
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
-            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem, leopardSpawnEgg);
+            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem,
+            leopardSpawnEgg, snakeSpawnEgg, snakeSkin);
             LOGGER.info("Successfully registered LeopardCraft items!");
         }
         
@@ -329,13 +340,13 @@ public class LeopardCraft {
         
         @SubscribeEvent
         public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
-        	entityRegistryEvent.getRegistry().register(LeopardEntity.getEntityType());
+        	entityRegistryEvent.getRegistry().registerAll(LeopardEntity.getEntityType(), SnakeEntity.SNAKE);
         	LOGGER.info("Sucessfully registered LeopardCraft entities!");
         }
         
         @SubscribeEvent
         public static void onBiomesRegistry(final RegistryEvent.Register<Biome> biomeRegistryEvent) {
-        	biomeRegistryEvent.getRegistry().registerAll(LeopardCraftBiomes.LEOPARD_SAVANNA, LeopardCraftBiomes.LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA_PLATEAU);
+        	biomeRegistryEvent.getRegistry().registerAll(LeopardCraftBiomes.LEOPARD_SAVANNA, LeopardCraftBiomes.LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.SNAKE_INFESTED_JUNGLE);
         }
     }
 }

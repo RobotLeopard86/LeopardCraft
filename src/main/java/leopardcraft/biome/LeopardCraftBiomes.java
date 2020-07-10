@@ -10,6 +10,7 @@ public class LeopardCraftBiomes {
 	public static final Biome SHATTERED_LEOPARD_SAVANNA = register(171, "shattered_leopard_savanna", new ShatteredLeopardSavannaBiome());
 	public static final Biome LEOPARD_SAVANNA_PLATEAU = register(172, "leopard_savanna_plateau", new LeopardSavannaPlateauBiome());
 	public static final Biome SHATTERED_LEOPARD_SAVANNA_PLATEAU = register(173, "shattered_leopard_savanna_plateau", new ShatteredLeopardSavannaPlateauBiome());
+	public static final Biome SNAKE_INFESTED_JUNGLE = register(174, "snake_infested_jungle", new SnakeInfestedJungleBiome());
 	
 	private static Biome register(int id, String key, Biome p_222369_2_) {
         Registry.register(Registry.BIOME, id, "leopardcraft:" + key, p_222369_2_);
