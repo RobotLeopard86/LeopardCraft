@@ -247,7 +247,7 @@ public class LeopardCraft {
         strippedMapleWoodItem = new BlockItem(strippedMapleWood, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         strippedMapleWoodItem.setRegistryName("stripped_maple_wood");
         LOGGER.info("Stripped Maple Wood: " + strippedMapleWoodItem.getRegistryName());
-        leopardSpawnEgg = new SpawnEggItem(LeopardEntity.getEntityType(), 10489616, 12040119, new Item.Properties().group(ItemGroup.MISC));
+        leopardSpawnEgg = new SpawnEggItem(LeopardEntity.getEntityType(), 15585032, 0, new Item.Properties().group(ItemGroup.MISC));
         leopardSpawnEgg.setRegistryName("leopard_spawn_egg");
         LOGGER.info("Leopard Spawn Egg: " + leopardSpawnEgg.getRegistryName());
     }
