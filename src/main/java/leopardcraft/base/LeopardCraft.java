@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import leopardcraft.biome.LeopardCraftBiomes;
 import leopardcraft.block.DirectionalBlock;
 import leopardcraft.block.MapleButtonBlock;
 import leopardcraft.block.MapleDoor;
@@ -20,7 +21,6 @@ import leopardcraft.entity.render.LeopardEntityRender;
 import leopardcraft.te.MapleLogTileEntity;
 import leopardcraft.te.SapTapperTileEntity;
 import leopardcraft.tree.MapleTree;
-import leopardcraft.biome.LeopardCraftBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
@@ -38,10 +38,10 @@ import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SignItem;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -109,6 +109,7 @@ public class LeopardCraft {
     private static BlockItem strippedMapleWoodItem;
     private static BlockItem mapleFenceItem;
     private static BlockItem mapleFenceGateItem;
+    private static SpawnEggItem leopardSpawnEgg;
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
@@ -246,6 +247,9 @@ public class LeopardCraft {
         strippedMapleWoodItem = new BlockItem(strippedMapleWood, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         strippedMapleWoodItem.setRegistryName("stripped_maple_wood");
         LOGGER.info("Stripped Maple Wood: " + strippedMapleWoodItem.getRegistryName());
+        leopardSpawnEgg = new SpawnEggItem(LeopardEntity.getEntityType(), 10489616, 12040119, new Item.Properties().group(ItemGroup.MISC));
+        leopardSpawnEgg.setRegistryName("leopard_spawn_egg");
+        LOGGER.info("Leopard Spawn Egg: " + leopardSpawnEgg.getRegistryName());
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -313,7 +317,7 @@ public class LeopardCraft {
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
-            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem );
+            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem, leopardSpawnEgg);
             LOGGER.info("Successfully registered LeopardCraft items!");
         }
         

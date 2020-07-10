@@ -1,14 +1,15 @@
 {
-	"parent": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
-			"item": "leopardcraft:maple_planks"
-		},
-		{
-			"item": "leopardcraft:maple_planks"
-		}
-	],
-	"result": {
-		"item": "leopardcraft:maple_pressure_plate"
-	}
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_pressure_plate",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "leopardcraft:maple_planks"
+    }
+  },
+  "result": {
+    "item": "leopardcraft:maple_pressure_plate"
+  }
 }

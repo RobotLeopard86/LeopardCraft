@@ -1,17 +1,18 @@
 {
-	"parent": "minecraft:crafting_shaped",
-	"pattern": [
-		" ]]",
-		" ]]",
-		" ]]"
-	],
-	"key": {
-		"]": {
-			"item": "leopardcraft:maple_planks"
-		}
-	},
-	"result": {
-		"item": "leopardcraft:maple_door",
-		"count": 3
-	}
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "leopardcraft:maple_planks"
+    }
+  },
+  "result": {
+    "item": "leopardcraft:maple_door",
+    "count": 3
+  }
 }

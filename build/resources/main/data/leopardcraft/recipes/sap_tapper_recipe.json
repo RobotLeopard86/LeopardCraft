@@ -1,9 +1,9 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " i>",
-        " I ",
-        "i+i"
+        " _ ",
+        "iii",
+        "I  "
     ],
     "key": {
         "i": {
@@ -12,11 +12,8 @@
         "I": {
             "item": "minecraft:iron_block"
         },
-        ">": {
-            "item": "minecraft:shears"
-        },
-        "+": {
-            "item": "minecraft:iron_bars"
+        "_": {
+        	"item": "minecraft:lever"
         }
     },
     "result": {

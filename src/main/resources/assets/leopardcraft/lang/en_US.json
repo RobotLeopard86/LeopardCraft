@@ -41,5 +41,9 @@
     "biome.leopardcraft.leopard_savanna": "Leopard Savanna",
     "biome.leopardcraft.leopard_savanna_plateau": "Leopard Savanna Plateau",
     "biome.leopardcraft.shattered_leopard_savanna": "Shattered Leopard Savanna",
-    "biome.leopardcraft.shattered_leopard_savanna_plateau": "Shattered Leopard Savanna Plateau"
+    "biome.leopardcraft.shattered_leopard_savanna_plateau": "Shattered Leopard Savanna Plateau",
+    "item.leopardcraft.batter": "Batter",
+    "item.leopardcraft.leopard_spawn_egg": "Leopard Spawn Egg",
+    "item.leopardcraft.pancake": "Pancake",
+    "item.leopardcraft.pancake_with_syrup": "Pancake with Syrup"
 }
