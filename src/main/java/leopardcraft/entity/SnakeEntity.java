@@ -1,36 +1,28 @@
 package leopardcraft.entity;
 
-import javax.annotation.Nullable;
-
 import leopardcraft.base.LeopardCraft;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
-import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IWorld;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class SnakeEntity extends MonsterEntity {
+public class SnakeEntity extends AnimalEntity {
 
 	public static final EntityType<SnakeEntity> SNAKE = LeopardCraft.register("snake", EntityType.Builder.create(SnakeEntity::new, EntityClassification.MONSTER).size(0.6F, 0.7F));
 	
@@ -48,8 +40,6 @@ public class SnakeEntity extends MonsterEntity {
 		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, BeeEntity.class, 6.0F, 1.0D, 1.2D));
 		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 	    this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-	    this.goalSelector.addGoal(1, new HurtByTargetGoal(this));
-	    this.goalSelector.addGoal(1, new SnakeEntity.AttackGoal(this));
 	}
 	
 	protected void registerAttributes() {
@@ -58,66 +48,28 @@ public class SnakeEntity extends MonsterEntity {
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.00032D);
 	}
 	
-	public boolean attackEntityAsMob(Entity entityIn) {
-		if(super.attackEntityAsMob(entityIn)) {
-			if (entityIn instanceof LivingEntity) {
-	            int i = 0;
-	            if (this.world.getDifficulty() == Difficulty.NORMAL) {
-	               i = 7;
-	            } else if (this.world.getDifficulty() == Difficulty.HARD) {
-	               i = 15;
-	            }
-
-	            if (i > 0) {
-	               ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.BLINDNESS, i * 20, 0));
-	               ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.WITHER, i * 10, 0));
-	               ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.NAUSEA, i * 20, 0));
-	            }
+	public boolean processInteract(PlayerEntity player, Hand hand) {
+	      ItemStack itemstack = player.getHeldItem(hand);
+	      if (itemstack.getItem() == Items.GLASS_BOTTLE && !player.abilities.isCreativeMode) {
+	         itemstack.shrink(1);
+	         if (itemstack.isEmpty()) {
+	            player.setHeldItem(hand, new ItemStack(LeopardCraft.snakeVenom));
+	         } else if (!player.inventory.addItemStackToInventory(new ItemStack(LeopardCraft.snakeVenom))) {
+	            player.dropItem(new ItemStack(LeopardCraft.snakeVenom), false);
 	         }
-			
-			return true;
-		} else {
-			return false;
-		}
+
+	         return true;
+	      } else {
+	         return super.processInteract(player, hand);
+	      }
+	   }
+
+	@Override
+	public AgeableEntity createChild(AgeableEntity ageable) {
+		SnakeEntity snakeentity = SNAKE.create(this.world);
+		
+		snakeentity.onInitialSpawn(this.world, this.world.getDifficultyForLocation(new BlockPos(snakeentity)), SpawnReason.BREEDING, (ILivingEntityData)null, (CompoundNBT)null);
+		
+		return snakeentity;
 	}
-	
-	static class AttackGoal extends MeleeAttackGoal {
-	      public AttackGoal(SnakeEntity snake) {
-	         super(snake, 1.0D, true);
-	      }
-
-	      /**
-	       * Returns whether the EntityAIBase should begin execution.
-	       */
-	      public boolean shouldExecute() {
-	         return super.shouldExecute() && !this.attacker.isBeingRidden();
-	      }
-
-	      /**
-	       * Returns whether an in-progress EntityAIBase should continue executing
-	       */
-	      public boolean shouldContinueExecuting() {
-	         float f = this.attacker.getBrightness();
-	         if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
-	            this.attacker.setAttackTarget((LivingEntity)null);
-	            return false;
-	         } else {
-	            return super.shouldContinueExecuting();
-	         }
-	      }
-
-	      protected double getAttackReachSqr(LivingEntity attackTarget) {
-	         return (double)(4.0F + attackTarget.getWidth());
-	      }
-	   }
-
-	
-	   @Nullable
-	   public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-	      return spawnDataIn;
-	   }
-
-	   protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-	      return 0.45F;
-	   }
 }

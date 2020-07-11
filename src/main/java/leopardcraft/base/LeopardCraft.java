@@ -114,9 +114,13 @@ public class LeopardCraft {
     private static SpawnEggItem leopardSpawnEgg;
     private static SpawnEggItem snakeSpawnEgg;
     private static Item snakeSkin;
+    public static Item banana;
+    public static Item snakeVenom;
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
+    private static Food bananaFood;
+    private static Food snakeVenomFood;
     //Create Mod Id
     public static String ModId = "leopardcraft";
     
@@ -139,125 +143,92 @@ public class LeopardCraft {
         //Create custom foods
         pancakeFood = (new Food.Builder()).hunger(8).saturation(8.0f).build();
         syrupPancakeFood = (new Food.Builder()).hunger(20).saturation(20.0f).effect(new EffectInstance(Effects.SATURATION, 3600, 0), 1.0f).build();
+        bananaFood = (new Food.Builder()).hunger(5).saturation(5.0f).build();
+        snakeVenomFood = (new Food.Builder()).hunger(0).saturation(0f).effect(new EffectInstance(Effects.WITHER, 200, 10), 1.0f).effect(new EffectInstance(Effects.BLINDNESS, 200, 0), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 200, 255), 1.0f).build();
         // Initialize our blocks & items
         mapleLogBlock = new MapleLog(Block.Properties.from(Blocks.JUNGLE_LOG));
         mapleLogBlock.setRegistryName("maple_log");
-        LOGGER.info("Maple Log: " + mapleLogBlock.getRegistryName());
         mapleLogItem = new BlockItem(mapleLogBlock,new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         mapleLogItem.setRegistryName("maple_log");
-        LOGGER.info("Maple Log Item: " + mapleLogItem.getRegistryName());
         mapleLeavesBlock = new Block(Block.Properties.from(Blocks.JUNGLE_LEAVES));
         mapleLeavesBlock.setRegistryName("maple_leaves");
-        LOGGER.info("Maple Leaves: " + mapleLeavesBlock.getRegistryName());
         mapleLeavesItem = new BlockItem(mapleLeavesBlock, new Item.Properties().group(ItemGroup.DECORATIONS));
         mapleLeavesItem.setRegistryName("maple_leaves");
-        LOGGER.info("Maple Leaves Item: " + mapleLeavesItem.getRegistryName());
         sapBottleItem = new Item(new Item.Properties().group(ItemGroup.MISC));
         syrupBottleItem = new Item(new Item.Properties().group(ItemGroup.FOOD).food(Foods.GOLDEN_CARROT));
         sapBottleItem.setRegistryName("sap_bottle");
         syrupBottleItem.setRegistryName("syrup_bottle");
-        LOGGER.info("Sap: " + sapBottleItem.getRegistryName() + " and here is the Syrup: " + syrupBottleItem.getRegistryName());
         sapTapperBlock = new SapTapperBlock();
-        LOGGER.info("Sap Tapper: " + sapTapperBlock.getRegistryName());
         sapTapperItem = new BlockItem(sapTapperBlock, new Item.Properties().group(ItemGroup.MISC));
         sapTapperItem.setRegistryName("sap_tapper");
-        LOGGER.info("Sap Tapper Item: " + sapTapperItem.getRegistryName());
         pancake = new Item(new Item.Properties().group(ItemGroup.FOOD).food(pancakeFood));
         pancakeWithSyrup = new Item(new Item.Properties().group(ItemGroup.FOOD).food(syrupPancakeFood));
         pancake.setRegistryName("pancake");
         pancakeWithSyrup.setRegistryName("pancake_with_syrup");
         batter = new Item(new Item.Properties().group(ItemGroup.MISC));
         batter.setRegistryName("batter");
-        LOGGER.info("Maple Eats: " + pancake.getRegistryName() + " (this one with syrup): " + pancakeWithSyrup.getRegistryName() + " and batter now: " + batter.getRegistryName());
         mapleSaplingBlock = new MapleSapling();
-        LOGGER.info("Maple Sapling: " + mapleSaplingBlock.getRegistryName());
         mapleSaplingItem = new BlockItem(mapleSaplingBlock, new Item.Properties().group(ItemGroup.DECORATIONS));
         mapleSaplingItem.setRegistryName("maple_sapling");
-        LOGGER.info("The sapling item: " + mapleSaplingItem.getRegistryName());
         maplePlanksBlock = new Block(Block.Properties.from(Blocks.JUNGLE_PLANKS));
         maplePlanksBlock.setRegistryName("maple_planks");
-        LOGGER.info("Maple Planks: " + maplePlanksBlock.getRegistryName());
         mapleSlabBlock = new SlabBlock(Block.Properties.from(Blocks.JUNGLE_SLAB));
         mapleSlabBlock.setRegistryName("maple_slab");
-        LOGGER.info("Maple Slab: " + mapleSlabBlock.getRegistryName());
         mapleStairsBlock = new MapleStairs();
-        LOGGER.info("Maple Stairs: " + mapleStairsBlock.getRegistryName());
         mapleTrapdoorBlock = new MapleTrapdoor();
-        LOGGER.info("Maple Trapdoor: " + mapleTrapdoorBlock.getRegistryName());
         mapleDoorBlock = new MapleDoor();
-        LOGGER.info("Maple Door: " + mapleDoorBlock.getRegistryName());
         mapleFence = new FenceBlock(Block.Properties.from(Blocks.JUNGLE_FENCE));
         mapleFence.setRegistryName("maple_fence");
-        LOGGER.info("Maple Fence: " + mapleFence.getRegistryName());
         mapleFenceGate = new FenceGateBlock(Block.Properties.from(Blocks.JUNGLE_FENCE_GATE));
         mapleFenceGate.setRegistryName("maple_fence_gate");
-        LOGGER.info("Maple Fence Gate: " + mapleFenceGate.getRegistryName());
         maplePressurePlate = new MaplePressurePlate();
-        LOGGER.info("Maple Pressure Plate: " + maplePressurePlate.getRegistryName());
         mapleButton = new MapleButtonBlock();
-        LOGGER.info("Maple Button: " + mapleButton.getRegistryName());
         strippedMapleLog = new DirectionalBlock(Block.Properties.from(mapleLogBlock));
         strippedMapleLog.setRegistryName("stripped_maple_log");
-        LOGGER.info("Stripped Maple Log: " + strippedMapleLog.getRegistryName());
         mapleWoodBlock = new MapleWood(Block.Properties.from(Blocks.JUNGLE_WOOD));
         mapleWoodBlock.setRegistryName("maple_wood");
-        LOGGER.info("Maple Wood: " + mapleWoodBlock.getRegistryName());
         strippedMapleWood = new DirectionalBlock(Block.Properties.from(mapleWoodBlock));
         strippedMapleWood.setRegistryName("stripped_maple_wood");
-        LOGGER.info("Stripped Maple Wood: " + strippedMapleWood.getRegistryName());
         mapleSignStanding = new StandingSignBlock(Block.Properties.from(Blocks.JUNGLE_SIGN), WoodType.field_227042_e_);
         mapleSignStanding.setRegistryName("maple_sign_standing");
-        LOGGER.info("Maple Sign (standing): " + mapleSignStanding.getRegistryName());
         mapleSignWall = new WallSignBlock(Block.Properties.from(Blocks.JUNGLE_SIGN), WoodType.field_227042_e_);
         mapleSignWall.setRegistryName("maple_sign_wall");
-        LOGGER.info("Maple Sign (wall): " + mapleSignWall.getRegistryName());
-        LOGGER.info("Now for the other items!");
         maplePlanksItem = new BlockItem(maplePlanksBlock, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         maplePlanksItem.setRegistryName("maple_planks");
-        LOGGER.info("Maple Planks: " + maplePlanksItem.getRegistryName());
         mapleSlabItem = new BlockItem(mapleSlabBlock, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         mapleSlabItem.setRegistryName("maple_slab");
-        LOGGER.info("Maple Slab: " + mapleSlabItem.getRegistryName());
         mapleStairsItem = new BlockItem(mapleStairsBlock, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         mapleStairsItem.setRegistryName("maple_stairs");
-        LOGGER.info("Maple Stairs: " + mapleStairsItem.getRegistryName());
         mapleTrapdoorItem = new BlockItem(mapleTrapdoorBlock, new Item.Properties().group(ItemGroup.REDSTONE));
         mapleTrapdoorItem.setRegistryName("maple_trapdoor");
-        LOGGER.info("Maple Trapdoor: " + mapleTrapdoorItem.getRegistryName());
         mapleDoorItem = new BlockItem(mapleDoorBlock, new Item.Properties().group(ItemGroup.REDSTONE));
         mapleDoorItem.setRegistryName("maple_door");
-        LOGGER.info("Maple Door: " + mapleDoorItem.getRegistryName());
         mapleSignItem = new SignItem((new Item.Properties()).maxStackSize(16).group(ItemGroup.DECORATIONS), mapleSignStanding, mapleSignWall);
         mapleSignItem.setRegistryName("maple_sign");
-        LOGGER.info("Maple Sign: " + mapleSignItem.getRegistryName());
         maplePressurePlateItem = new BlockItem(maplePressurePlate, new Item.Properties().group(ItemGroup.REDSTONE));
         maplePressurePlateItem.setRegistryName("maple_pressure_plate");
-        LOGGER.info("Maple Pressure Plate: " + maplePressurePlateItem.getRegistryName());
         mapleButtonItem = new BlockItem(mapleButton, new Item.Properties().group(ItemGroup.REDSTONE));
         mapleButtonItem.setRegistryName("maple_button");
-        LOGGER.info("Maple Button Too: " + mapleButtonItem.getRegistryName());
         mapleFenceItem = new BlockItem(mapleFence, new Item.Properties().group(ItemGroup.DECORATIONS));
         mapleFenceItem.setRegistryName("maple_fence");
-        LOGGER.info("Maple Fence: " + mapleFenceItem.getRegistryName());
         mapleFenceGateItem = new BlockItem(mapleFenceGate, new Item.Properties().group(ItemGroup.REDSTONE));
         mapleFenceGateItem.setRegistryName("maple_fence_gate");
-        LOGGER.info("The Fence's Gate: " + mapleFenceGateItem.getRegistryName());
         strippedMapleLogItem = new BlockItem(strippedMapleLog, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         strippedMapleLogItem.setRegistryName("stripped_maple_log");
-        LOGGER.info("Stripped Maple Log: " + strippedMapleLogItem.getRegistryName());
         mapleWoodItem = new BlockItem(mapleWoodBlock, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         mapleWoodItem.setRegistryName("maple_wood");
-        LOGGER.info("Maple Wood: " + mapleWoodItem.getRegistryName());
         strippedMapleWoodItem = new BlockItem(strippedMapleWood, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         strippedMapleWoodItem.setRegistryName("stripped_maple_wood");
-        LOGGER.info("Stripped Maple Wood: " + strippedMapleWoodItem.getRegistryName());
         leopardSpawnEgg = new SpawnEggItem(LeopardEntity.getEntityType(), 15585032, 0, new Item.Properties().group(ItemGroup.MISC));
         leopardSpawnEgg.setRegistryName("leopard_spawn_egg");
-        LOGGER.info("Leopard Spawn Egg: " + leopardSpawnEgg.getRegistryName());
         snakeSpawnEgg = new SpawnEggItem(SnakeEntity.SNAKE, 894731, 8978176, new Item.Properties().group(ItemGroup.MISC));
         snakeSpawnEgg.setRegistryName("snake_spawn_egg");
         snakeSkin = new Item(new Item.Properties().group(ItemGroup.MISC).maxStackSize(16));
         snakeSkin.setRegistryName("snakeskin");
+        snakeVenom = new Item(new Item.Properties().group(ItemGroup.BREWING).maxStackSize(8).food(snakeVenomFood));
+        snakeVenom.setRegistryName("venom");
+        banana = new Item(new Item.Properties().group(ItemGroup.FOOD).food(bananaFood));
+        banana.setRegistryName("banana");
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -328,7 +299,7 @@ public class LeopardCraft {
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
             itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem,
-            leopardSpawnEgg, snakeSpawnEgg, snakeSkin);
+            leopardSpawnEgg, snakeSpawnEgg, snakeSkin, banana, snakeVenom);
             LOGGER.info("Successfully registered LeopardCraft items!");
         }
         

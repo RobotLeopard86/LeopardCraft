@@ -47,5 +47,9 @@
     "item.leopardcraft.pancake": "Pancake",
     "item.leopardcraft.pancake_with_syrup": "Pancake with Syrup",
     "entity.leopardcraft.snake": "Snake",
-    "biome.leopardcraft.snake_infested_jungle": "Snake Infested Jungle"
+    "biome.leopardcraft.snake_infested_jungle": "Snake Infested Jungle",
+    "item.leopardcraft.snake_spawn_egg": "Snake Spawn Egg",
+    "item.leopardcraft.snakeskin": "Snakeskin",
+    "item.leopardcraft.venom": "Snake Venom",
+    "item.leopardcraft.banana": "Banana"
 }
