@@ -47,9 +47,12 @@
     "item.leopardcraft.pancake": "Pancake",
     "item.leopardcraft.pancake_with_syrup": "Pancake with Syrup",
     "entity.leopardcraft.snake": "Snake",
-    "biome.leopardcraft.snake_infested_jungle": "Snake Infested Jungle",
+    "biome.leopardcraft.junglemania": "Junglemania",
     "item.leopardcraft.snake_spawn_egg": "Snake Spawn Egg",
     "item.leopardcraft.snakeskin": "Snakeskin",
     "item.leopardcraft.venom": "Snake Venom",
-    "item.leopardcraft.banana": "Banana"
+    "item.leopardcraft.banana": "Banana",
+    "item.leopardcraft.monkey_spawn_egg": "Monkey Spawn Egg",
+    "entity.leopardcraft.monkey": "Monkey",
+    "item.leopardcraft.antivenom": "Antivenom"
 }

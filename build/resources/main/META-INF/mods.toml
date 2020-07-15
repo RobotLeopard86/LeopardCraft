@@ -17,9 +17,9 @@ version="${file.jarVersion}" #mandatory
  # A display name for the mod
 displayName="LeopardCraft" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="http://robotleopard86.github.io/LeopardCraft/updatemod.json" #optional
+updateJSONURL="https://robotleopard86.github.io/ModdingHub/mod-updates/leopardcraft.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="http://robotleopard86.github.io/LeopardCraft/index.html" #optional
+displayURL="https://robotleopard86.github.io/ModdingHub/leopardcraft.html" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="leopardcraftlogo.png" #optional
 # A text field displayed in the mod UI
@@ -28,7 +28,7 @@ credits="Thanks for this mod absolutely must go to our dad, Scott Siebers, for h
 authors="RobotLeopard86, RobotPanda23" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This mod will add lots of things to the game, and we mean that. From leopards, koalas, dinos and more, to chemistry, to more tools, the sky
+This mod will add lots of things to the game, and we mean that. From leopards, koalas, frogs and more, to chemistry, to more tools, the sky
 is the limit here. Enjoy!
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.

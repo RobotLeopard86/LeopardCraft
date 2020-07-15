@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import leopardcraft.entity.LeopardEntity;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 // Made with Blockbench 3.5.4
 // Exported for Minecraft version 1.15

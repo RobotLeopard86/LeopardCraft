@@ -17,8 +17,10 @@ import leopardcraft.block.MapleTrapdoor;
 import leopardcraft.block.MapleWood;
 import leopardcraft.block.SapTapperBlock;
 import leopardcraft.entity.LeopardEntity;
+import leopardcraft.entity.MonkeyEntity;
 import leopardcraft.entity.SnakeEntity;
 import leopardcraft.entity.render.LeopardEntityRender;
+import leopardcraft.entity.render.MonkeyEntityRender;
 import leopardcraft.entity.render.SnakeEntityRender;
 import leopardcraft.te.MapleLogTileEntity;
 import leopardcraft.te.SapTapperTileEntity;
@@ -111,16 +113,17 @@ public class LeopardCraft {
     private static BlockItem strippedMapleWoodItem;
     private static BlockItem mapleFenceItem;
     private static BlockItem mapleFenceGateItem;
-    private static SpawnEggItem leopardSpawnEgg;
+    public static SpawnEggItem leopardSpawnEgg;
     private static SpawnEggItem snakeSpawnEgg;
-    private static Item snakeSkin;
+    public static Item snakeSkin;
     public static Item banana;
-    public static Item snakeVenom;
+    public static Item venom;
+    private static SpawnEggItem monkeySpawnEgg;
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
     private static Food bananaFood;
-    private static Food snakeVenomFood;
+    private static Food venomFood;
     //Create Mod Id
     public static String ModId = "leopardcraft";
     
@@ -143,8 +146,8 @@ public class LeopardCraft {
         //Create custom foods
         pancakeFood = (new Food.Builder()).hunger(8).saturation(8.0f).build();
         syrupPancakeFood = (new Food.Builder()).hunger(20).saturation(20.0f).effect(new EffectInstance(Effects.SATURATION, 3600, 0), 1.0f).build();
-        bananaFood = (new Food.Builder()).hunger(5).saturation(5.0f).build();
-        snakeVenomFood = (new Food.Builder()).hunger(0).saturation(0f).effect(new EffectInstance(Effects.WITHER, 200, 10), 1.0f).effect(new EffectInstance(Effects.BLINDNESS, 200, 0), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 200, 255), 1.0f).build();
+        bananaFood = (new Food.Builder()).hunger(5).saturation(5.0f).build(); 
+        venomFood = (new Food.Builder()).hunger(0).saturation(0.0f).setAlwaysEdible().effect(new EffectInstance(Effects.WITHER, 600), 1.0f).effect(new EffectInstance(Effects.BLINDNESS, 600), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 600), 1.0f).build();
         // Initialize our blocks & items
         mapleLogBlock = new MapleLog(Block.Properties.from(Blocks.JUNGLE_LOG));
         mapleLogBlock.setRegistryName("maple_log");
@@ -225,10 +228,12 @@ public class LeopardCraft {
         snakeSpawnEgg.setRegistryName("snake_spawn_egg");
         snakeSkin = new Item(new Item.Properties().group(ItemGroup.MISC).maxStackSize(16));
         snakeSkin.setRegistryName("snakeskin");
-        snakeVenom = new Item(new Item.Properties().group(ItemGroup.BREWING).maxStackSize(8).food(snakeVenomFood));
-        snakeVenom.setRegistryName("venom");
         banana = new Item(new Item.Properties().group(ItemGroup.FOOD).food(bananaFood));
         banana.setRegistryName("banana");
+        monkeySpawnEgg = new SpawnEggItem(MonkeyEntity.MONKEY, 7555121, 16579584, new Item.Properties().group(ItemGroup.MISC));
+        monkeySpawnEgg.setRegistryName("monkey_spawn_egg");
+        venom = new Item(new Item.Properties().group(ItemGroup.BREWING).maxStackSize(1).food(venomFood));
+        venom.setRegistryName("venom");
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -263,6 +268,7 @@ public class LeopardCraft {
         LOGGER.info("Got game settings {}", minecraft.gameSettings);
         RenderingRegistry.registerEntityRenderingHandler(LeopardEntity.getEntityType(), LeopardEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(SnakeEntity.SNAKE, SnakeEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(MonkeyEntity.MONKEY, MonkeyEntityRender::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -299,7 +305,7 @@ public class LeopardCraft {
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
             itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem,
-            leopardSpawnEgg, snakeSpawnEgg, snakeSkin, banana, snakeVenom);
+            banana, snakeSkin, leopardSpawnEgg, snakeSpawnEgg, monkeySpawnEgg, venom);
             LOGGER.info("Successfully registered LeopardCraft items!");
         }
         
@@ -311,13 +317,13 @@ public class LeopardCraft {
         
         @SubscribeEvent
         public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
-        	entityRegistryEvent.getRegistry().registerAll(LeopardEntity.getEntityType(), SnakeEntity.SNAKE);
+        	entityRegistryEvent.getRegistry().registerAll(LeopardEntity.getEntityType(), SnakeEntity.SNAKE, MonkeyEntity.MONKEY);
         	LOGGER.info("Sucessfully registered LeopardCraft entities!");
         }
         
         @SubscribeEvent
         public static void onBiomesRegistry(final RegistryEvent.Register<Biome> biomeRegistryEvent) {
-        	biomeRegistryEvent.getRegistry().registerAll(LeopardCraftBiomes.LEOPARD_SAVANNA, LeopardCraftBiomes.LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.SNAKE_INFESTED_JUNGLE);
+        	biomeRegistryEvent.getRegistry().registerAll(LeopardCraftBiomes.LEOPARD_SAVANNA, LeopardCraftBiomes.LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.JUNGLEMANIA);
         }
     }
 }

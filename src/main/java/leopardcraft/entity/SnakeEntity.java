@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 
 public class SnakeEntity extends AnimalEntity {
 
-	public static final EntityType<SnakeEntity> SNAKE = LeopardCraft.register("snake", EntityType.Builder.create(SnakeEntity::new, EntityClassification.MONSTER).size(0.6F, 0.7F));
+	public static final EntityType<SnakeEntity> SNAKE = LeopardCraft.register("snake", EntityType.Builder.create(SnakeEntity::new, EntityClassification.CREATURE).size(0.6F, 0.7F));
 	
 	public EntityType<SnakeEntity> getEntityType() {
 		return SNAKE;
@@ -47,22 +47,6 @@ public class SnakeEntity extends AnimalEntity {
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.00032D);
 	}
-	
-	public boolean processInteract(PlayerEntity player, Hand hand) {
-	      ItemStack itemstack = player.getHeldItem(hand);
-	      if (itemstack.getItem() == Items.GLASS_BOTTLE && !player.abilities.isCreativeMode) {
-	         itemstack.shrink(1);
-	         if (itemstack.isEmpty()) {
-	            player.setHeldItem(hand, new ItemStack(LeopardCraft.snakeVenom));
-	         } else if (!player.inventory.addItemStackToInventory(new ItemStack(LeopardCraft.snakeVenom))) {
-	            player.dropItem(new ItemStack(LeopardCraft.snakeVenom), false);
-	         }
-
-	         return true;
-	      } else {
-	         return super.processInteract(player, hand);
-	      }
-	   }
 
 	@Override
 	public AgeableEntity createChild(AgeableEntity ageable) {
@@ -72,4 +56,25 @@ public class SnakeEntity extends AnimalEntity {
 		
 		return snakeentity;
 	}
+
+	@Override
+	public boolean processInteract(PlayerEntity player, Hand hand) {
+		ItemStack itemstack = player.getHeldItem(hand);
+	      if (itemstack.getItem() == Items.GLASS_BOTTLE) {
+	         if(!player.abilities.isCreativeMode) {
+	        	 itemstack.shrink(1);
+	         }
+	         if (itemstack.isEmpty()) {
+	            player.setHeldItem(hand, new ItemStack(LeopardCraft.venom));
+	         } else if (!player.inventory.addItemStackToInventory(new ItemStack(LeopardCraft.venom))) {
+	            player.dropItem(new ItemStack(LeopardCraft.venom), false);
+	         }
+
+	         return true;
+	      } else {
+	         return super.processInteract(player, hand);
+	      }
+	}
+	
+	
 }

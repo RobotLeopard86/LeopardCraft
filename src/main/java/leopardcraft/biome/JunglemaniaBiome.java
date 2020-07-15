@@ -1,5 +1,6 @@
 package leopardcraft.biome;
 
+import leopardcraft.entity.MonkeyEntity;
 import leopardcraft.entity.SnakeEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -11,9 +12,9 @@ import net.minecraft.world.gen.feature.structure.MineshaftConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftStructure;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
-public class SnakeInfestedJungleBiome extends Biome {
+public class JunglemaniaBiome extends Biome {
 
-	public SnakeInfestedJungleBiome() {
+	public JunglemaniaBiome() {
 		super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG).precipitation(Biome.RainType.RAIN).category(Biome.Category.JUNGLE).depth(0.1F).scale(0.2F).temperature(0.95F).downfall(0.9F).waterColor(4159204).waterFogColor(329011).parent((String)null));
 		this.func_226711_a_(Feature.JUNGLE_TEMPLE.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
 	    this.func_226711_a_(Feature.MINESHAFT.func_225566_b_(new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
@@ -40,7 +41,8 @@ public class SnakeInfestedJungleBiome extends Biome {
 	    this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
 	    this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
 	    this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SKELETON, 100, 4, 4));
-	    this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(SnakeEntity.SNAKE, 12, 4, 10));
+	    this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(SnakeEntity.SNAKE, 12, 4, 10));
+	    this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(MonkeyEntity.MONKEY, 14, 7, 16));
 	}
 
 }
