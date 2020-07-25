@@ -28,7 +28,7 @@ credits="Thanks for this mod absolutely must go to our dad, Scott Siebers, for h
 authors="RobotLeopard86, RobotPanda23" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This mod will add lots of things to the game, and we mean that. From leopards, koalas, frogs and more, to chemistry, to more tools, the sky
+This mod will add lots of things to the game, and we mean that. From leopards, koalas, monkeys, and snakes, to more tools, the sky
 is the limit here. Enjoy!
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
