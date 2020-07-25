@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " _i",
+        "Ii_",
+        "II "
+    ],
+    "key": {
+        "i": {
+            "item": "minecraft:iron_ingot"
+        },
+        "I": {
+            "item": "minecraft:iron_block"
+        },
+        "_": {
+        	"item": "minecraft:iron_sword"
+        }
+    },
+    "result": {
+        "item": "leopardcraft:chainsaw"
+    }
+}

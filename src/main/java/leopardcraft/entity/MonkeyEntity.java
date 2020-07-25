@@ -85,11 +85,11 @@ public class MonkeyEntity extends AnimalEntity {
 		case 20:
 			selectedItem = tradingLootTable[5];
 			break;
-		/*case 21:
+		case 21:
 		case 22:
 		case 23:
 			selectedItem = tradingLootTable[6];
-			break;*/
+			break;
 		case 24:
 		case 25:
 			selectedItem = tradingLootTable[8];

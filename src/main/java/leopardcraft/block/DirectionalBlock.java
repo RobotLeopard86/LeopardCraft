@@ -41,17 +41,7 @@ public class DirectionalBlock extends Block {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return placementStateGetter(context, false);
-	}
-   
-	public BlockState placementStateGetter(BlockItemUseContext useContext, boolean usingMapleLog) {
-		BlockState placementState = null;
-		if(usingMapleLog) {
-			placementState = stateContainer.getBaseState().with(axisProperty, useContext.getFace().getAxis()).with(MapleLog.sapState, 3);
-		} else if(!usingMapleLog) {
-			placementState = stateContainer.getBaseState().with(axisProperty, useContext.getFace().getAxis());
-		}
-		return placementState;
+		return stateContainer.getBaseState().with(axisProperty, context.getFace().getAxis());
 	}
 }
 

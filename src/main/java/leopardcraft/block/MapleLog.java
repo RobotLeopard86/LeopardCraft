@@ -36,7 +36,7 @@ public class MapleLog extends DirectionalBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return super.placementStateGetter(context, true);
+		return stateContainer.getBaseState().with(axisProperty, context.getFace().getAxis()).with(sapState, 3);
 	}
 	
 	@Override
@@ -49,6 +49,8 @@ public class MapleLog extends DirectionalBlock {
 			if(player.getHeldItem(hand).getItem() == Items.WOODEN_AXE || player.getHeldItem(hand).getItem() == Items.STONE_AXE || player.getHeldItem(hand).getItem() == Items.IRON_AXE || player.getHeldItem(hand).getItem() == Items.GOLDEN_AXE || player.getHeldItem(hand).getItem() == Items.DIAMOND_AXE) {
 				LOGGER.info("Has axe");
 				world.getWorld().setBlockState(position, LeopardCraft.strippedMapleLog.getDefaultState().with(DirectionalBlock.axisProperty, state.get(DirectionalBlock.axisProperty)));
+			} else {
+				return ActionResultType.FAIL;
 			}
 		}
 		return ActionResultType.SUCCESS;
