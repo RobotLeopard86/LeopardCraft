@@ -23,7 +23,7 @@ import leopardcraft.entity.render.LeopardEntityRender;
 import leopardcraft.entity.render.MonkeyEntityRender;
 import leopardcraft.entity.render.SnakeEntityRender;
 import leopardcraft.item.ChainsawItem;
-import net.minecraft.item.crafting.ShapedRecipe;
+import leopardcraft.item.MagnetItem;
 import leopardcraft.te.MapleLogTileEntity;
 import leopardcraft.te.SapTapperTileEntity;
 import leopardcraft.tree.MapleTree;
@@ -122,6 +122,7 @@ public class LeopardCraft {
     public static Item venom;
     private static SpawnEggItem monkeySpawnEgg;
     private static ChainsawItem chainsaw;
+    private static MagnetItem magnet;
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
@@ -238,6 +239,7 @@ public class LeopardCraft {
         venom = new Item(new Item.Properties().group(ItemGroup.BREWING).maxStackSize(1).food(venomFood));
         venom.setRegistryName("venom");
         chainsaw = new ChainsawItem();
+        magnet = new MagnetItem();
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -309,7 +311,7 @@ public class LeopardCraft {
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
             itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem,
-            banana, snakeSkin, leopardSpawnEgg, snakeSpawnEgg, monkeySpawnEgg, venom, chainsaw);
+            banana, snakeSkin, leopardSpawnEgg, snakeSpawnEgg, monkeySpawnEgg, venom, chainsaw, magnet);
             LOGGER.info("Successfully registered LeopardCraft items!");
         }
         

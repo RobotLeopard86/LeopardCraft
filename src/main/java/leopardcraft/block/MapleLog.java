@@ -50,7 +50,7 @@ public class MapleLog extends DirectionalBlock {
 				LOGGER.info("Has axe");
 				world.getWorld().setBlockState(position, LeopardCraft.strippedMapleLog.getDefaultState().with(DirectionalBlock.axisProperty, state.get(DirectionalBlock.axisProperty)));
 			} else {
-				return ActionResultType.FAIL;
+				return ActionResultType.PASS;
 			}
 		}
 		return ActionResultType.SUCCESS;
