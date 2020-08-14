@@ -56,5 +56,16 @@
     "entity.leopardcraft.monkey": "Monkey",
     "item.leopardcraft.antivenom": "Antivenom",
     "item.leopardcraft.chainsaw": "Chainsaw",
-    "item.leopardcraft.magnet": "Magnet"
+    "item.leopardcraft.magnet": "Magnet",
+    "item.leopardcraft.tunneler": "Tunneler",
+    "item.leopardcraft.supa_tunneler": "Supa Tunneler",
+    "item.leopardcraft.emerald_helmet": "Emerald Helmet",
+    "item.leopardcraft.emerald_chestplate": "Emerald Chestplate",
+    "item.leopardcraft.emerald_leggings": "Emerald Leggings",
+    "item.leopardcraft.emerald_boots": "Emerald Boots",
+    "item.leopardcraft.emerald_sword": "Emerald Sword",
+    "item.leopardcraft.emerald_pickaxe": "Emerald Pickaxe",
+    "item.leopardcraft.emerald_axe": "Emerald Axe",
+    "item.leopardcraft.emerald_shovel": "Emerald Shovel",
+    "item.leopardcraft.emerald_hoe": "Emerald Hoe",
 }

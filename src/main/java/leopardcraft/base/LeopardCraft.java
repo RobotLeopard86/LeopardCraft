@@ -24,27 +24,40 @@ import leopardcraft.entity.render.MonkeyEntityRender;
 import leopardcraft.entity.render.SnakeEntityRender;
 import leopardcraft.item.ChainsawItem;
 import leopardcraft.item.MagnetItem;
+import leopardcraft.item.Tunneler;
 import leopardcraft.te.MapleLogTileEntity;
 import leopardcraft.te.SapTapperTileEntity;
 import leopardcraft.tree.MapleTree;
+import leopardcraft.util.EmeraldArmorMaterial;
+import leopardcraft.util.EmeraldItemTier;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Foods;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SignItem;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.SwordItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
@@ -77,7 +90,7 @@ public class LeopardCraft {
     //Declare our items and blocks
     public static MapleLog mapleLogBlock;
     private static BlockItem mapleLogItem;
-    public static Block mapleLeavesBlock;
+    public static LeavesBlock mapleLeavesBlock;
     private static BlockItem mapleLeavesItem;
     public static Item sapBottleItem;
     public static Item syrupBottleItem;
@@ -123,6 +136,17 @@ public class LeopardCraft {
     private static SpawnEggItem monkeySpawnEgg;
     private static ChainsawItem chainsaw;
     private static MagnetItem magnet;
+    private static Tunneler tunneler;
+    private static Tunneler supaTunneler;
+    private static PickaxeItem emeraldPickaxe;
+    private static AxeItem emeraldAxe;
+    private static HoeItem emeraldHoe;
+    private static ShovelItem emeraldShovel;
+    private static SwordItem emeraldSword;
+    private static ArmorItem emeraldHelmet;
+    private static ArmorItem emeraldChestplate;
+    private static ArmorItem emeraldLeggings;
+    private static ArmorItem emeraldBoots;
     //Declare custom foods
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
@@ -157,7 +181,7 @@ public class LeopardCraft {
         mapleLogBlock.setRegistryName("maple_log");
         mapleLogItem = new BlockItem(mapleLogBlock,new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
         mapleLogItem.setRegistryName("maple_log");
-        mapleLeavesBlock = new Block(Block.Properties.from(Blocks.JUNGLE_LEAVES));
+        mapleLeavesBlock = new LeavesBlock(Block.Properties.from(Blocks.JUNGLE_LEAVES));
         mapleLeavesBlock.setRegistryName("maple_leaves");
         mapleLeavesItem = new BlockItem(mapleLeavesBlock, new Item.Properties().group(ItemGroup.DECORATIONS));
         mapleLeavesItem.setRegistryName("maple_leaves");
@@ -240,6 +264,26 @@ public class LeopardCraft {
         venom.setRegistryName("venom");
         chainsaw = new ChainsawItem();
         magnet = new MagnetItem();
+        tunneler = new Tunneler(false);
+        supaTunneler = new Tunneler(true);
+        emeraldHelmet = new ArmorItem(EmeraldArmorMaterial.EMERALD, EquipmentSlotType.HEAD, (new Item.Properties()).group(ItemGroup.COMBAT));
+        emeraldChestplate = new ArmorItem(EmeraldArmorMaterial.EMERALD, EquipmentSlotType.CHEST, (new Item.Properties()).group(ItemGroup.COMBAT));
+        emeraldLeggings = new ArmorItem(EmeraldArmorMaterial.EMERALD, EquipmentSlotType.LEGS, (new Item.Properties()).group(ItemGroup.COMBAT));
+        emeraldBoots = new ArmorItem(EmeraldArmorMaterial.EMERALD, EquipmentSlotType.FEET, (new Item.Properties()).group(ItemGroup.COMBAT));
+        emeraldPickaxe = new PickaxeItem(EmeraldItemTier.EMERALD, -1, -3.4F, (new Item.Properties()).group(ItemGroup.TOOLS));
+        emeraldAxe = new AxeItem(EmeraldItemTier.EMERALD, -0.5F, -2F, (new Item.Properties().group(ItemGroup.TOOLS)));
+        emeraldHoe = new HoeItem(EmeraldItemTier.EMERALD, -0F, (new Item.Properties().group(ItemGroup.TOOLS)));
+        emeraldShovel = new ShovelItem(EmeraldItemTier.EMERALD, 1.2F, -1F, (new Item.Properties().group(ItemGroup.TOOLS)));
+        emeraldSword = new SwordItem(EmeraldItemTier.EMERALD, 9, -5.2F, (new Item.Properties().group(ItemGroup.COMBAT)));
+        emeraldHelmet.setRegistryName("emerald_helmet");
+        emeraldChestplate.setRegistryName("emerald_chestplate");
+        emeraldLeggings.setRegistryName("emerald_leggings");
+        emeraldBoots.setRegistryName("emerald_boots");
+        emeraldPickaxe.setRegistryName("emerald_pickaxe");
+        emeraldAxe.setRegistryName("emerald_axe");
+        emeraldShovel.setRegistryName("emerald_shovel");
+        emeraldHoe.setRegistryName("emerald_hoe");
+        emeraldSword.setRegistryName("emerald_sword");
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -275,6 +319,7 @@ public class LeopardCraft {
         RenderingRegistry.registerEntityRenderingHandler(LeopardEntity.getEntityType(), LeopardEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(SnakeEntity.SNAKE, SnakeEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(MonkeyEntity.MONKEY, MonkeyEntityRender::new);
+        RenderTypeLookup.setRenderLayer(mapleSaplingBlock, RenderType.func_228643_e_());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -311,7 +356,7 @@ public class LeopardCraft {
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
             itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem,
-            banana, snakeSkin, leopardSpawnEgg, snakeSpawnEgg, monkeySpawnEgg, venom, chainsaw, magnet);
+            banana, snakeSkin, leopardSpawnEgg, snakeSpawnEgg, monkeySpawnEgg, venom, chainsaw, magnet, tunneler, supaTunneler, emeraldHelmet, emeraldChestplate, emeraldLeggings, emeraldBoots, emeraldPickaxe, emeraldAxe, emeraldHoe, emeraldSword, emeraldShovel);
             LOGGER.info("Successfully registered LeopardCraft items!");
         }
         
