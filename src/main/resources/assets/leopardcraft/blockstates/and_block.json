@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"axis=x": {"model": "leopardcraft:block/and_block"},
+		"axis=z": {"model": "leopardcraft:block/and_block", "y": 90}
+	}
+}

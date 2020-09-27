@@ -45,7 +45,7 @@
     "item.leopardcraft.batter": "Batter",
     "item.leopardcraft.leopard_spawn_egg": "Leopard Spawn Egg",
     "item.leopardcraft.pancake": "Pancake",
-    "item.leopardcraft.pancake_with_syrup": "Pancake with Syrup",
+    "item.leopardcraft.syrup_pancake": "Pancake with Syrup",
     "entity.leopardcraft.snake": "Snake",
     "biome.leopardcraft.junglemania": "Junglemania",
     "item.leopardcraft.snake_spawn_egg": "Snake Spawn Egg",
@@ -68,4 +68,10 @@
     "item.leopardcraft.emerald_axe": "Emerald Axe",
     "item.leopardcraft.emerald_shovel": "Emerald Shovel",
     "item.leopardcraft.emerald_hoe": "Emerald Hoe",
+    "block.leopardcraft.and_block": "And Block",
+    "item.leopardcraft.and_block": "And Block",
+    "block.leopardcraft.pe_block": "Pulse Extender Block",
+    "item.leopardcraft.pe_block": "Pulse Extender Block",
+    "block.leopardcraft.t_flip_flop_block": "T Flip-Flop Block",
+    "item.leopardcraft.t_flip_flop_block": "T Flip-Flop Block"
 }

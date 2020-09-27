@@ -3,7 +3,7 @@ package leopardcraft.te;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.blocks.LCBlocks;
 import leopardcraft.block.MapleLog;
 import leopardcraft.block.SapTapperBlock;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -14,10 +14,7 @@ import net.minecraft.util.math.BlockPos;
 public class SapTapperTileEntity extends TileEntity implements ITickableTileEntity {
 
 	private static final Logger LOGGER = LogManager.getLogger();
-	private static TileEntityType<?> type = TileEntityType.Builder.create(SapTapperTileEntity::new, LeopardCraft.sapTapperBlock).build(null);
-	static {
-		type.setRegistryName("leopardcraft", "sap_tapper_te");
-	}
+	private static TileEntityType<?> type = TileEntityType.Builder.create(SapTapperTileEntity::new, LCBlocks.sapTapper.get()).build(null);
 	
 	private int tapTime = 0;
 	
@@ -25,12 +22,9 @@ public class SapTapperTileEntity extends TileEntity implements ITickableTileEnti
 		super(type);
 	}
 	
-	
-	
-	public static TileEntityType<?> getTileEntityType(){
+	public static TileEntityType<?> getTeType() {
 		return type;
 	}
-	
 	
 	private boolean isTapping() {
 		return tapTime > 0;

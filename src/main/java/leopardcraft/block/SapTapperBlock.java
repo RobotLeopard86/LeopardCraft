@@ -1,6 +1,6 @@
 package leopardcraft.block;
 
-import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.items.LCItems;
 import leopardcraft.te.SapTapperTileEntity;
 import leopardcraft.util.LeopardCraftHelpers;
 import net.minecraft.block.Block;
@@ -73,13 +73,12 @@ public class SapTapperBlock extends Block {
 	public SapTapperBlock() {
 		super(Block.Properties.create(Material.MISCELLANEOUS));
 		this.getStateContainer().getBaseState().with(tankState, TankStates.EMPTY).with(facing, Direction.NORTH);
-		this.setRegistryName("sap_tapper");
 	}
 	
 	@Override
 	public ActionResultType func_225533_a_(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if(!worldIn.isRemote && player.getHeldItem(handIn).getItem() == Items.GLASS_BOTTLE && state.get(tankState) == TankStates.FULL) {
-			player.setHeldItem(handIn, new ItemStack(LeopardCraft.sapBottleItem));
+			player.setHeldItem(handIn, new ItemStack(LCItems.sapBottle.get()));
 			worldIn.getWorld().setBlockState(pos, stateContainer.getBaseState().with(facing, state.get(facing)).with(tankState, TankStates.EMPTY));
 		}
 		return ActionResultType.SUCCESS;

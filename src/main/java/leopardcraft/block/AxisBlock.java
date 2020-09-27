@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
-public class DirectionalBlock extends Block {
+public class AxisBlock extends Block {
     
 	
 	//Variables go here
@@ -21,7 +21,7 @@ public class DirectionalBlock extends Block {
 
     
     //Constructor
-    public DirectionalBlock(Properties properties) {
+    public AxisBlock(Properties properties) {
         super(properties);
         setDefaultState(stateContainer.getBaseState().with(axisProperty, Direction.Axis.Y));
     }

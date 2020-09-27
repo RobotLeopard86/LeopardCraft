@@ -5,71 +5,26 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import leopardcraft.biome.LeopardCraftBiomes;
-import leopardcraft.block.DirectionalBlock;
-import leopardcraft.block.MapleButtonBlock;
-import leopardcraft.block.MapleDoor;
-import leopardcraft.block.MapleLog;
-import leopardcraft.block.MaplePressurePlate;
-import leopardcraft.block.MapleSapling;
-import leopardcraft.block.MapleStairs;
-import leopardcraft.block.MapleTrapdoor;
-import leopardcraft.block.MapleWood;
-import leopardcraft.block.SapTapperBlock;
+import leopardcraft.base.biomes.LCBiomes;
+import leopardcraft.base.blocks.LCBlocks;
+import leopardcraft.base.items.LCItems;
+import leopardcraft.base.tileentities.LCTEs;
 import leopardcraft.entity.LeopardEntity;
 import leopardcraft.entity.MonkeyEntity;
 import leopardcraft.entity.SnakeEntity;
 import leopardcraft.entity.render.LeopardEntityRender;
 import leopardcraft.entity.render.MonkeyEntityRender;
 import leopardcraft.entity.render.SnakeEntityRender;
-import leopardcraft.item.ChainsawItem;
-import leopardcraft.item.MagnetItem;
-import leopardcraft.item.Tunneler;
-import leopardcraft.te.MapleLogTileEntity;
-import leopardcraft.te.SapTapperTileEntity;
-import leopardcraft.tree.MapleTree;
-import leopardcraft.util.EmeraldArmorMaterial;
-import leopardcraft.util.EmeraldItemTier;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StandingSignBlock;
-import net.minecraft.block.WallSignBlock;
-import net.minecraft.block.WoodType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Food;
-import net.minecraft.item.Foods;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.ShovelItem;
-import net.minecraft.item.SignItem;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.item.SwordItem;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -88,7 +43,7 @@ public class LeopardCraft {
     private static final Logger LOGGER = LogManager.getLogger();
     private Minecraft minecraft;
     //Declare our items and blocks
-    public static MapleLog mapleLogBlock;
+    /*public static MapleLog mapleLogBlock;
     private static BlockItem mapleLogItem;
     public static LeavesBlock mapleLeavesBlock;
     private static BlockItem mapleLeavesItem;
@@ -151,7 +106,7 @@ public class LeopardCraft {
     private static Food pancakeFood;
     private static Food syrupPancakeFood;
     private static Food bananaFood;
-    private static Food venomFood;
+    private static Food venomFood;*/
     //Create Mod Id
     public static String ModId = "leopardcraft";
     
@@ -159,7 +114,7 @@ public class LeopardCraft {
     public LeopardCraft() {
         LOGGER.info("Welcome to LeopardCraft!");
 
-
+        final IEventBus eventbus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -171,8 +126,14 @@ public class LeopardCraft {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        
+        LCItems.itemRegistry.register(eventbus);
+        LCBlocks.blockRegistry.register(eventbus);
+        LCBiomes.biomeRegistry.register(eventbus);
+        LCTEs.teRegistry.register(eventbus);
+        //mapleSapling = new MapleSapling(new MapleTree(), Block.Properties.from(Blocks.JUNGLE_SAPLING));
         //Create custom foods
-        pancakeFood = (new Food.Builder()).hunger(8).saturation(8.0f).build();
+        /*pancakeFood = (new Food.Builder()).hunger(8).saturation(8.0f).build();
         syrupPancakeFood = (new Food.Builder()).hunger(20).saturation(20.0f).effect(new EffectInstance(Effects.SATURATION, 3600, 0), 1.0f).build();
         bananaFood = (new Food.Builder()).hunger(5).saturation(5.0f).build(); 
         venomFood = (new Food.Builder()).hunger(0).saturation(0.0f).setAlwaysEdible().effect(new EffectInstance(Effects.WITHER, 600), 1.0f).effect(new EffectInstance(Effects.BLINDNESS, 600), 1.0f).effect(new EffectInstance(Effects.NAUSEA, 600), 1.0f).build();
@@ -283,15 +244,15 @@ public class LeopardCraft {
         emeraldAxe.setRegistryName("emerald_axe");
         emeraldShovel.setRegistryName("emerald_shovel");
         emeraldHoe.setRegistryName("emerald_hoe");
-        emeraldSword.setRegistryName("emerald_sword");
+        emeraldSword.setRegistryName("emerald_sword");*/
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
         // some preinit code ( just for looks, these log statements are )
         LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("PANCAKES...YUM >> {}", pancake.getRegistryName());
-        addMapleTrees(Biomes.TAIGA);
+        //LOGGER.info("PANCAKES...YUM >> {}", pancake.getRegistryName());
+        /*addMapleTrees(Biomes.TAIGA);
         addMapleTrees(Biomes.TAIGA_HILLS);
         addMapleTrees(Biomes.TAIGA_MOUNTAINS);
         addMapleTrees(Biomes.SNOWY_TAIGA);
@@ -300,13 +261,13 @@ public class LeopardCraft {
         addMapleTrees(Biomes.GIANT_SPRUCE_TAIGA);
         addMapleTrees(Biomes.GIANT_SPRUCE_TAIGA_HILLS);
         addMapleTrees(Biomes.GIANT_TREE_TAIGA_HILLS);
-        addMapleTrees(Biomes.GIANT_TREE_TAIGA_HILLS);
+        addMapleTrees(Biomes.GIANT_TREE_TAIGA_HILLS);*/
         LOGGER.info("Sucessfully added maple trees to taiga biomes!");
     }
     
-    public static void addMapleTrees(Biome biomeIn) {
+    /*public static void addMapleTrees(Biome biomeIn) {
         biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.NORMAL_TREE.func_225566_b_(MapleTree.MAPLE_TREE_CONFIG).func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(10, 0.1F, 1))));
-    }
+    }*/
     
     public static <T extends Entity> EntityType<T> register(String key, EntityType.Builder<T> builder) {
         return Registry.register(Registry.ENTITY_TYPE, "leopardcraft:" + key, builder.build(key));
@@ -319,7 +280,7 @@ public class LeopardCraft {
         RenderingRegistry.registerEntityRenderingHandler(LeopardEntity.getEntityType(), LeopardEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(SnakeEntity.SNAKE, SnakeEntityRender::new);
         RenderingRegistry.registerEntityRenderingHandler(MonkeyEntity.MONKEY, MonkeyEntityRender::new);
-        RenderTypeLookup.setRenderLayer(mapleSaplingBlock, RenderType.func_228643_e_());
+        //RenderTypeLookup.setRenderLayer(mapleSaplingBlock, RenderType.func_228643_e_());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -340,41 +301,5 @@ public class LeopardCraft {
     public void onServerStarting(final FMLServerStartingEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
-    }
-
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            blockRegistryEvent.getRegistry().registerAll(mapleLogBlock, mapleLeavesBlock, sapTapperBlock, mapleSaplingBlock, maplePlanksBlock, mapleSlabBlock, mapleStairsBlock, mapleTrapdoorBlock, mapleDoorBlock,
-            mapleSignStanding, mapleSignWall, maplePressurePlate, mapleButton, mapleWoodBlock, strippedMapleLog, strippedMapleWood, mapleFence, mapleFenceGate);
-            LOGGER.info("Successfully registered LeopardCraft blocks!");
-        }
-
-        @SubscribeEvent
-        public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent){
-            itemRegistryEvent.getRegistry().registerAll(mapleLogItem, mapleLeavesItem, sapBottleItem, syrupBottleItem, sapTapperItem, pancake, pancakeWithSyrup, batter, mapleSaplingItem, maplePlanksItem, mapleSlabItem, mapleStairsItem, mapleTrapdoorItem, mapleDoorItem, mapleSignItem, maplePressurePlateItem, mapleButtonItem, mapleWoodItem, strippedMapleLogItem, strippedMapleWoodItem, mapleFenceItem, mapleFenceGateItem,
-            banana, snakeSkin, leopardSpawnEgg, snakeSpawnEgg, monkeySpawnEgg, venom, chainsaw, magnet, tunneler, supaTunneler, emeraldHelmet, emeraldChestplate, emeraldLeggings, emeraldBoots, emeraldPickaxe, emeraldAxe, emeraldHoe, emeraldSword, emeraldShovel);
-            LOGGER.info("Successfully registered LeopardCraft items!");
-        }
-        
-        @SubscribeEvent
-        public static void onTileEntitiesRegistry(final RegistryEvent.Register<TileEntityType<?>> teRegisterEvent) {
-        	teRegisterEvent.getRegistry().registerAll(SapTapperTileEntity.getTileEntityType(), MapleLogTileEntity.getTileEntityType());
-        	LOGGER.info("Sucessfully registered LeopardCraft tile entities!");
-        }
-        
-        @SubscribeEvent
-        public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
-        	entityRegistryEvent.getRegistry().registerAll(LeopardEntity.getEntityType(), SnakeEntity.SNAKE, MonkeyEntity.MONKEY);
-        	LOGGER.info("Sucessfully registered LeopardCraft entities!");
-        }
-        
-        @SubscribeEvent
-        public static void onBiomesRegistry(final RegistryEvent.Register<Biome> biomeRegistryEvent) {
-        	biomeRegistryEvent.getRegistry().registerAll(LeopardCraftBiomes.LEOPARD_SAVANNA, LeopardCraftBiomes.LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA, LeopardCraftBiomes.SHATTERED_LEOPARD_SAVANNA_PLATEAU, LeopardCraftBiomes.JUNGLEMANIA);
-        }
     }
 }

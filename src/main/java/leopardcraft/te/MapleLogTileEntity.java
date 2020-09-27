@@ -3,7 +3,7 @@ package leopardcraft.te;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.blocks.LCBlocks;
 import leopardcraft.block.MapleLog;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -12,10 +12,7 @@ import net.minecraft.tileentity.TileEntityType;
 public class MapleLogTileEntity extends TileEntity implements ITickableTileEntity {
 	
 	private static final Logger LOGGER = LogManager.getLogger();
-	private static TileEntityType<?> type = TileEntityType.Builder.create(MapleLogTileEntity::new, LeopardCraft.mapleLogBlock).build(null);
-	static {
-		type.setRegistryName("leopardcraft", "maple_log_te");
-	}
+	private static TileEntityType<?> type = TileEntityType.Builder.create(MapleLogTileEntity::new, LCBlocks.mapleLog.get()).build(null);
 	
 	private int regenTime = 160;
 	
@@ -23,7 +20,7 @@ public class MapleLogTileEntity extends TileEntity implements ITickableTileEntit
 		super(type);
 	}
 	
-	public static TileEntityType<?> getTileEntityType(){
+	public static TileEntityType<?> getTeType(){
 		return type;
 	}
 	

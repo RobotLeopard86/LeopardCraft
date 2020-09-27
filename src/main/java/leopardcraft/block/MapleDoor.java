@@ -8,6 +8,5 @@ public class MapleDoor extends DoorBlock {
 	
 	public MapleDoor() {
 		super(Block.Properties.from(Blocks.JUNGLE_DOOR));
-		this.setRegistryName("maple_door");
 	}
 }

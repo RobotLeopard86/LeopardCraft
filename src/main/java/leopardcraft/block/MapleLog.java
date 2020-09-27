@@ -1,12 +1,12 @@
 package leopardcraft.block;
 
-import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.blocks.LCBlocks;
 import leopardcraft.te.MapleLogTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class MapleLog extends DirectionalBlock {
+public class MapleLog extends AxisBlock {
 
 	public static final IntegerProperty sapState = IntegerProperty.create("sap", 0, 3);
 	
@@ -46,9 +46,9 @@ public class MapleLog extends DirectionalBlock {
 	
 	public ActionResultType activationCode(BlockState state, World world, BlockPos position, PlayerEntity player, Hand hand) {
 		if(!world.isRemote) {
-			if(player.getHeldItem(hand).getItem() == Items.WOODEN_AXE || player.getHeldItem(hand).getItem() == Items.STONE_AXE || player.getHeldItem(hand).getItem() == Items.IRON_AXE || player.getHeldItem(hand).getItem() == Items.GOLDEN_AXE || player.getHeldItem(hand).getItem() == Items.DIAMOND_AXE) {
+			if(player.getHeldItem(hand).getItem() instanceof AxeItem) {
 				LOGGER.info("Has axe");
-				world.getWorld().setBlockState(position, LeopardCraft.strippedMapleLog.getDefaultState().with(DirectionalBlock.axisProperty, state.get(DirectionalBlock.axisProperty)));
+				world.getWorld().setBlockState(position, LCBlocks.strippedMapleLog.get().getDefaultState().with(AxisBlock.axisProperty, state.get(AxisBlock.axisProperty)));
 			} else {
 				return ActionResultType.PASS;
 			}

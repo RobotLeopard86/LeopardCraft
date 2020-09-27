@@ -8,7 +8,6 @@ public class MapleTrapdoor extends TrapDoorBlock {
 
 	public MapleTrapdoor() {
 		super(Block.Properties.from(Blocks.JUNGLE_TRAPDOOR));
-		this.setRegistryName("maple_trapdoor");
 	}
 	
 }

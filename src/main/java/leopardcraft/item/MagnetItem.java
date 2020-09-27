@@ -18,7 +18,6 @@ public class MagnetItem extends Item {
 	
 	public MagnetItem() {
 		super(new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).setNoRepair());
-		this.setRegistryName("magnet");
 	}
 	
 	public BlockPos getPosFromXYZ(int x, int y, int z) {

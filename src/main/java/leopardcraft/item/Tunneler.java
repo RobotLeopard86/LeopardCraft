@@ -17,12 +17,9 @@ public class Tunneler extends Item {
 	
 	public Tunneler(boolean supa) {
 		super(new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).setNoRepair());
-		String registryName = "tunneler";
 		if(supa) {
 			range = 7;
-			registryName = "supa_tunneler";
 		}
-		this.setRegistryName(registryName);
 	}
 	
 	public void tunnel(ItemUseContext context, BlockPos origin) { 

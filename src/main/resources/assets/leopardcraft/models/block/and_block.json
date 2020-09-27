@@ -1,0 +1,7 @@
+{
+	"parent": "leopardcraft:block/lc_redstone_block",
+	"textures": {
+		"main": "leopardcraft:block/and_block",
+		"side": "leopardcraft:block/and_block_side"
+	}
+}

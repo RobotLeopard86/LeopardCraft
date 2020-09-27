@@ -6,9 +6,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.blocks.LCBlocks;
 import leopardcraft.block.MapleLog;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.LogBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -23,11 +24,10 @@ public class ChainsawItem extends Item {
 	
 	public ChainsawItem() {
 		super(new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).setNoRepair());
-		this.setRegistryName("chainsaw");
 	}
 	
 	public List<BlockPos> findTreeBlocks(BlockPos pos, List<BlockPos> treeBlocks, ItemUseContext context) {
-		if(!(context.getWorld().getBlockState(pos).getBlock() instanceof MapleLog) && !(context.getWorld().getBlockState(pos).getBlock() instanceof LogBlock) && !(context.getWorld().getBlockState(pos).getBlock() == Blocks.SPRUCE_LEAVES) && !(context.getWorld().getBlockState(pos).getBlock() == Blocks.OAK_LEAVES) && !(context.getWorld().getBlockState(pos).getBlock() == LeopardCraft.mapleLeavesBlock) && !(context.getWorld().getBlockState(pos).getBlock() == Blocks.BIRCH_LEAVES) && !(context.getWorld().getBlockState(pos).getBlock() == Blocks.DARK_OAK_LEAVES) && !(context.getWorld().getBlockState(pos).getBlock() == Blocks.JUNGLE_LEAVES) && !(context.getWorld().getBlockState(pos).getBlock() == Blocks.ACACIA_LEAVES) && !(context.getWorld().getBlockState(pos).getBlock() == LeopardCraft.strippedMapleLog)) {
+		if(!(context.getWorld().getBlockState(pos).getBlock() instanceof MapleLog) && !(context.getWorld().getBlockState(pos).getBlock() instanceof LogBlock) && !(context.getWorld().getBlockState(pos).getBlock() instanceof LeavesBlock) && !(context.getWorld().getBlockState(pos).getBlock() == LCBlocks.strippedMapleLog.get())) {
 			return treeBlocks;
 		}
 		treeBlocks.add(pos);

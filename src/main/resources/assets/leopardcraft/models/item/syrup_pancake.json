@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "leopardcraft:item/pancake_with_syrup"
+		"layer0": "leopardcraft:item/syrup_pancake"
 	}
 }

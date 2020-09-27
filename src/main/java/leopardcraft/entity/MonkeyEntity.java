@@ -1,6 +1,7 @@
 package leopardcraft.entity;
 
 import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.items.LCItems;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -25,11 +26,11 @@ public class MonkeyEntity extends AnimalEntity {
 
 	public static final EntityType<MonkeyEntity> MONKEY = LeopardCraft.register("monkey", EntityType.Builder.create(MonkeyEntity::new, EntityClassification.CREATURE).size(0.6F, 0.7F));
 	
-	public EntityType<MonkeyEntity> getEntityType() {
+	public static EntityType<MonkeyEntity> getEntityType() {
 		return MONKEY;
 	}
 	
-	private static final Item[] tradingLootTable = {Items.BRICK_SLAB, Items.BAKED_POTATO, LeopardCraft.pancake, Items.DIORITE, Items.JUNGLE_BOAT, LeopardCraft.sapBottleItem, LeopardCraft.venom, Items.PARROT_SPAWN_EGG, LeopardCraft.snakeSkin, LeopardCraft.leopardSpawnEgg, Items.YELLOW_DYE, Items.ENCHANTED_GOLDEN_APPLE};
+	private static final Item[] tradingLootTable = {Items.BRICK_SLAB, Items.BAKED_POTATO, Items.PRISMARINE_SHARD, Items.DIORITE, Items.JUNGLE_BOAT, Items.ACTIVATOR_RAIL, Items.BEEF, Items.PARROT_SPAWN_EGG, Items.GLOBE_BANNER_PATTERN, Items.MELON_SEEDS, Items.YELLOW_DYE, Items.ENCHANTED_GOLDEN_APPLE};
 	
 	public MonkeyEntity(EntityType<? extends MonkeyEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -117,7 +118,7 @@ public class MonkeyEntity extends AnimalEntity {
 	@Override
 	public boolean processInteract(PlayerEntity player, Hand hand) {
 	      ItemStack itemstack = player.getHeldItem(hand);
-	      if (itemstack.getItem() == LeopardCraft.banana) {
+	      if (itemstack.getItem() == LCItems.banana.get()) {
 	         if(!player.abilities.isCreativeMode) {
 	        	 itemstack.shrink(1);
 	         }

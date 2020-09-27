@@ -4,11 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WoodButtonBlock;
 
-public class MapleButtonBlock extends WoodButtonBlock {
+public class MapleButton extends WoodButtonBlock {
 
-	public MapleButtonBlock() {
+	public MapleButton() {
 		super(Block.Properties.from(Blocks.JUNGLE_BUTTON));
-		this.setRegistryName("maple_button");
 	}
 	
 }

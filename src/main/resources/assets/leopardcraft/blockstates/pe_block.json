@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model": "leopardcraft:block/pe_block", "y": 90},
+		"facing=south": {"model": "leopardcraft:block/pe_block", "y": 270},
+		"facing=east": {"model": "leopardcraft:block/pe_block", "y": 0},
+		"facing=west": {"model": "leopardcraft:block/pe_block", "y": 180}
+	}
+}

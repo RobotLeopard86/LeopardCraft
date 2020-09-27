@@ -1,0 +1,12 @@
+{	
+	"parent": "minecraft:block/cube"	,
+	"textures": {
+		"particle": "#main",
+		"down": "#main",
+		"up": "#main",
+		"north": "#main",
+		"south": "#main",
+		"west": "#side",
+		"east": "#side"
+	}
+}

@@ -1,6 +1,7 @@
 package leopardcraft.entity;
 
 import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.items.LCItems;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -26,7 +27,7 @@ public class SnakeEntity extends AnimalEntity {
 
 	public static final EntityType<SnakeEntity> SNAKE = LeopardCraft.register("snake", EntityType.Builder.create(SnakeEntity::new, EntityClassification.CREATURE).size(0.6F, 0.7F));
 	
-	public EntityType<SnakeEntity> getEntityType() {
+	public static EntityType<SnakeEntity> getEntityType() {
 		return SNAKE;
 	}
 	
@@ -65,9 +66,9 @@ public class SnakeEntity extends AnimalEntity {
 	        	 itemstack.shrink(1);
 	         }
 	         if (itemstack.isEmpty()) {
-	            player.setHeldItem(hand, new ItemStack(LeopardCraft.venom));
-	         } else if (!player.inventory.addItemStackToInventory(new ItemStack(LeopardCraft.venom))) {
-	            player.dropItem(new ItemStack(LeopardCraft.venom), false);
+	            player.setHeldItem(hand, new ItemStack(LCItems.snakeVenom.get()));
+	         } else if (!player.inventory.addItemStackToInventory(new ItemStack(LCItems.snakeVenom.get()))) {
+	            player.dropItem(new ItemStack(LCItems.snakeVenom.get()), false);
 	         }
 
 	         return true;

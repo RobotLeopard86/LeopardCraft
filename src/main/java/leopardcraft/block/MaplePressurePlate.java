@@ -8,6 +8,5 @@ public class MaplePressurePlate extends PressurePlateBlock {
 	
 	public MaplePressurePlate() {
 		super(Sensitivity.EVERYTHING, Block.Properties.from(Blocks.JUNGLE_PRESSURE_PLATE));
-		this.setRegistryName("maple_pressure_plate");
 	}
 }

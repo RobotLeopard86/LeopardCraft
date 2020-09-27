@@ -3,6 +3,7 @@ package leopardcraft.entity;
 import java.util.UUID;
 
 import leopardcraft.base.LeopardCraft;
+import leopardcraft.base.items.LCItems;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -57,7 +58,7 @@ public class LeopardEntity extends TameableEntity {
 	
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return stack.getItem() == LeopardCraft.syrupBottleItem || stack.getItem() == LeopardCraft.pancake || stack.getItem() == LeopardCraft.pancakeWithSyrup;
+		return stack.getItem() == LCItems.syrupBottle.get() || stack.getItem() == LCItems.pancake.get() || stack.getItem() == LCItems.pancakeWithSyrup.get();
 	}
 	
 	public boolean processInteract(PlayerEntity player, Hand hand) {
@@ -66,10 +67,10 @@ public class LeopardEntity extends TameableEntity {
 	      if (itemstack.getItem() instanceof SpawnEggItem) {
 	         return super.processInteract(player, hand);
 	      } else if (this.world.isRemote) {
-	         return this.isOwner(player) || item.getItem() == LeopardCraft.syrupBottleItem || item.getItem() == LeopardCraft.pancake || item.getItem() == LeopardCraft.pancakeWithSyrup;
+	         return this.isOwner(player) || item.getItem() == LCItems.syrupBottle.get() || item.getItem() == LCItems.pancake.get() || item.getItem() == LCItems.pancakeWithSyrup.get();
 	      } else {
 	         if (this.isTamed()) {
-	            if (item.isFood() && item.getItem() == LeopardCraft.syrupBottleItem || item.getItem() == LeopardCraft.pancake || item.getItem() == LeopardCraft.pancakeWithSyrup && this.getHealth() < this.getMaxHealth()) {
+	            if (item.isFood() && item.getItem() == LCItems.syrupBottle.get() || item.getItem() == LCItems.pancake.get() || item.getItem() == LCItems.pancakeWithSyrup.get() && this.getHealth() < this.getMaxHealth()) {
 	               if (!player.abilities.isCreativeMode) {
 	                  itemstack.shrink(1);
 	               }
@@ -78,7 +79,7 @@ public class LeopardEntity extends TameableEntity {
 	               return true;
 	            }
 
-	         } else if (item.getItem() == LeopardCraft.syrupBottleItem || item.getItem() == LeopardCraft.pancake || item.getItem() == LeopardCraft.pancakeWithSyrup) {
+	         } else if (item.getItem() == LCItems.syrupBottle.get() || item.getItem() == LCItems.pancake.get() || item.getItem() == LCItems.pancakeWithSyrup.get()) {
 	            if (!player.abilities.isCreativeMode) {
 	               itemstack.shrink(1);
 	            }
@@ -106,7 +107,7 @@ public class LeopardEntity extends TameableEntity {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.fromItems(LeopardCraft.syrupBottleItem, LeopardCraft.pancake, LeopardCraft.pancakeWithSyrup), false));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.fromItems(LCItems.syrupBottle.get(), LCItems.pancake.get(), LCItems.pancakeWithSyrup.get()), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 		this.goalSelector.addGoal(6, new LookRandomlyGoal(this));

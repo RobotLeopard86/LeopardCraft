@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model": "leopardcraft:block/t_flip_flop_block", "y": 90},
+		"facing=south": {"model": "leopardcraft:block/t_flip_flop_block", "y": 270},
+		"facing=east": {"model": "leopardcraft:block/t_flip_flop_block", "y": 0},
+		"facing=west": {"model": "leopardcraft:block/t_flip_flop_block", "y": 180}
+	}
+}
