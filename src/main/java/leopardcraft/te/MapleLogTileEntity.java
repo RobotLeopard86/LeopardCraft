@@ -1,18 +1,14 @@
 package leopardcraft.te;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import leopardcraft.base.blocks.LCBlocks;
+import leopardcraft.base.LeopardCraft;
 import leopardcraft.block.MapleLog;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
 public class MapleLogTileEntity extends TileEntity implements ITickableTileEntity {
-	
-	private static final Logger LOGGER = LogManager.getLogger();
-	private static TileEntityType<?> type = TileEntityType.Builder.create(MapleLogTileEntity::new, LCBlocks.mapleLog.get()).build(null);
+
+	private static TileEntityType<?> type = TileEntityType.Builder.create(MapleLogTileEntity::new, LeopardCraft.mapleLog).build(null);
 	
 	private int regenTime = 160;
 	
@@ -26,9 +22,7 @@ public class MapleLogTileEntity extends TileEntity implements ITickableTileEntit
 	
 	private boolean regenerationAllowed(int sapLevel) {
 		boolean allowed = false;
-		if(sapLevel >= 3) {
-			allowed = false;
-		} else {
+		if(sapLevel <= 3) {
 			allowed = true;
 		}
 		return allowed;
@@ -38,11 +32,8 @@ public class MapleLogTileEntity extends TileEntity implements ITickableTileEntit
 	public void tick() {
 		if(regenerationAllowed(this.getBlockState().get(MapleLog.sapState)) && regenTime >= 1) {
 			regenTime--;
-			LOGGER.info("Time remaining: " + regenTime);
-		} else if(regenTime < 1){
-			LOGGER.info("Sap level increasing...");
+		} else if(regenTime < 1 && (this.getBlockState().get(MapleLog.sapState) + 1) < 4){
 			this.getWorld().setBlockState(getPos(), getBlockState().with(MapleLog.axisProperty, this.getBlockState().get(MapleLog.axisProperty)).with(MapleLog.sapState, this.getBlockState().get(MapleLog.sapState) + 1));
-			LOGGER.info("Resetting regen time...");
 			regenTime = 160;
 		}
 	}

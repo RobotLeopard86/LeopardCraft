@@ -3,10 +3,10 @@ package leopardcraft.base.blocks;
 import leopardcraft.base.LeopardCraft;
 import leopardcraft.block.AndBlock;
 import leopardcraft.block.AxisBlock;
+import leopardcraft.block.IntegerContainerBlock;
 import leopardcraft.block.LCStairsBlock;
 import leopardcraft.block.MapleButton;
 import leopardcraft.block.MapleDoor;
-import leopardcraft.block.MapleLog;
 import leopardcraft.block.MaplePressurePlate;
 import leopardcraft.block.MapleTrapdoor;
 import leopardcraft.block.PulseExtenderBlock;
@@ -16,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.WallSignBlock;
@@ -29,8 +28,6 @@ public class LCBlocks {
 
 	public static final DeferredRegister<Block> blockRegistry = new DeferredRegister<>(ForgeRegistries.BLOCKS, LeopardCraft.ModId);
 	
-	public static final RegistryObject<MapleLog> mapleLog = blockRegistry.register("maple_log", () -> new MapleLog(Block.Properties.from(Blocks.JUNGLE_LOG)));
-	public static final RegistryObject<LeavesBlock> mapleLeaves = blockRegistry.register("maple_leaves", () -> new LeavesBlock(Block.Properties.from(Blocks.JUNGLE_LEAVES)));
 	public static final RegistryObject<SapTapperBlock> sapTapper = blockRegistry.register("sap_tapper", () -> new SapTapperBlock());
 	public static final RegistryObject<Block> maplePlanks = blockRegistry.register("maple_planks", () -> new Block(Block.Properties.from(Blocks.JUNGLE_PLANKS)));
 	public static final RegistryObject<MapleButton> mapleButton = blockRegistry.register("maple_button", () -> new MapleButton());
@@ -44,12 +41,13 @@ public class LCBlocks {
 	public static final RegistryObject<StandingSignBlock> mapleSignS = blockRegistry.register("maple_standing_sign", () -> new StandingSignBlock(Block.Properties.from(Blocks.JUNGLE_SIGN), WoodType.field_227042_e_));
 	public static final RegistryObject<WallSignBlock> mapleSignW = blockRegistry.register("maple_wall_sign", () -> new WallSignBlock(Block.Properties.from(Blocks.JUNGLE_SIGN), WoodType.field_227042_e_));
 	public static final RegistryObject<AxisBlock> mapleWood = blockRegistry.register("maple_wood", () -> new AxisBlock(Block.Properties.from(Blocks.JUNGLE_WOOD)));
-	public static final RegistryObject<AxisBlock> strippedMapleLog = blockRegistry.register("stripped_maple_log", () -> new AxisBlock(Block.Properties.from(mapleLog.get())));
+	public static final RegistryObject<AxisBlock> strippedMapleLog = blockRegistry.register("stripped_maple_log", () -> new AxisBlock(Block.Properties.from(LeopardCraft.mapleLog)));
 	public static final RegistryObject<AxisBlock> strippedMapleWood = blockRegistry.register("stripped_maple_wood", () -> new AxisBlock(Block.Properties.from(mapleWood.get())));
 	public static final RegistryObject<AndBlock> andBlock = blockRegistry.register("and_block", () -> new AndBlock());
 	public static final RegistryObject<PulseExtenderBlock> peBlock = blockRegistry.register("pe_block", () -> new PulseExtenderBlock());
 	public static final RegistryObject<TFlipFlopBlock> tffBlock = blockRegistry.register("t_flip_flop_block", () -> new TFlipFlopBlock());
-
+	public static final RegistryObject<IntegerContainerBlock> icBlock = blockRegistry.register("variable_container_int", () -> new IntegerContainerBlock());
+	
 	//Grian Suggestion Blocks
 	
 	//Granite

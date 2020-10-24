@@ -9,7 +9,6 @@ import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
 
 public class AndBlockTileEntity extends TileEntity implements ITickableTileEntity {
 	

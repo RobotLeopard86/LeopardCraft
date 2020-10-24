@@ -35,8 +35,9 @@ public class LCItems {
 	public static final DeferredRegister<Item> itemRegistry = new DeferredRegister<>(ForgeRegistries.ITEMS, LeopardCraft.ModId); 
 	
 	//BlockItems
-	public static final RegistryObject<BlockItem> mapleLog = itemRegistry.register("maple_log", () -> new BlockItem(LCBlocks.mapleLog.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS))); 
-	public static final RegistryObject<BlockItem> mapleLeaves = itemRegistry.register("maple_leaves", () -> new BlockItem(LCBlocks.mapleLeaves.get(), new Item.Properties().group(ItemGroup.DECORATIONS))); 
+	public static final RegistryObject<BlockItem> mapleLog = itemRegistry.register("maple_log", () -> new BlockItem(LeopardCraft.mapleLog, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS))); 
+	public static final RegistryObject<BlockItem> mapleLeaves = itemRegistry.register("maple_leaves", () -> new BlockItem(LeopardCraft.mapleLeaves, new Item.Properties().group(ItemGroup.DECORATIONS))); 
+	public static final RegistryObject<BlockItem> mapleSapling = itemRegistry.register("maple_sapling", () -> new BlockItem(LeopardCraft.mapleSapling, new Item.Properties().group(ItemGroup.DECORATIONS)));
 	public static final RegistryObject<BlockItem> sapTapper = itemRegistry.register("sap_tapper", () -> new BlockItem(LCBlocks.sapTapper.get(), new Item.Properties().group(ItemGroup.MISC))); 
 	public static final RegistryObject<BlockItem> mapleDoor = itemRegistry.register("maple_door", () -> new BlockItem(LCBlocks.mapleDoor.get(), new Item.Properties().group(ItemGroup.REDSTONE))); 
 	public static final RegistryObject<BlockItem> mapleTrapdoor = itemRegistry.register("maple_trapdoor", () -> new BlockItem(LCBlocks.mapleTrapdoor.get(), new Item.Properties().group(ItemGroup.REDSTONE))); 
@@ -52,8 +53,7 @@ public class LCItems {
 	public static final RegistryObject<SignItem> mapleSign = itemRegistry.register("maple_sign", () -> new SignItem(new Item.Properties().group(ItemGroup.DECORATIONS), LCBlocks.mapleSignS.get(), LCBlocks.mapleSignW.get()));	
 	public static final RegistryObject<BlockItem> andBlockItem = itemRegistry.register("and_block", () -> new BlockItem(LCBlocks.andBlock.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
 	public static final RegistryObject<BlockItem> peBlockItem = itemRegistry.register("pe_block", () -> new BlockItem(LCBlocks.peBlock.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
-	public static final RegistryObject<BlockItem> tffBlockItem = itemRegistry.register("t_flip_flop_block", () -> new BlockItem(LCBlocks.tffBlock.get(), new Item.Properties().group(ItemGroup.REDSTONE)));
-	
+	public static final RegistryObject<BlockItem> tffBlockItem = itemRegistry.register("t_flip_flop_block", () -> new BlockItem(LCBlocks.tffBlock.get(), new Item.Properties().group(ItemGroup.REDSTONE)));	
 	//FoodItems
 	//Food Def
 	private static Food pancakeFood = (new Food.Builder()).hunger(8).saturation(8.0f).build();

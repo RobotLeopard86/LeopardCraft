@@ -5,7 +5,6 @@ import leopardcraft.entity.LeopardEntity;
 import leopardcraft.entity.model.LeopardEntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
-
 import net.minecraft.util.ResourceLocation;
 
 public class LeopardEntityRender extends MobRenderer<LeopardEntity, LeopardEntityModel<LeopardEntity>> {
