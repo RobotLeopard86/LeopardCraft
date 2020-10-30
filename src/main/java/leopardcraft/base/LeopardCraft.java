@@ -46,7 +46,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class LeopardCraft {
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
-    private Minecraft minecraft;
+    public static Minecraft minecraft;
     //Create Mod Id
     public static String ModId = "leopardcraft";
     

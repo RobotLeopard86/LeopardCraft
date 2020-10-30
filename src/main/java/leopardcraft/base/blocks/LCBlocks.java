@@ -47,7 +47,6 @@ public class LCBlocks {
 	public static final RegistryObject<PulseExtenderBlock> peBlock = blockRegistry.register("pe_block", () -> new PulseExtenderBlock());
 	public static final RegistryObject<TFlipFlopBlock> tffBlock = blockRegistry.register("t_flip_flop_block", () -> new TFlipFlopBlock());
 	public static final RegistryObject<IntegerContainerBlock> icBlock = blockRegistry.register("variable_container_int", () -> new IntegerContainerBlock());
-	
 	//Grian Suggestion Blocks
 	
 	//Granite

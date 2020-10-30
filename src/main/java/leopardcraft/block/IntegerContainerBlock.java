@@ -1,10 +1,6 @@
 package leopardcraft.block;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import leopardcraft.gui.IntegerContainerScreen;
-import leopardcraft.util.VariableContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -19,15 +15,10 @@ import net.minecraft.world.World;
 
 public class IntegerContainerBlock extends Block {
 	
-	private static Logger logger = LogManager.getLogger();
-	
 	public static final IntegerProperty valueProperty = IntegerProperty.create("value", 0, 1000);
-	
-	public final VariableContainer<Integer> value = new VariableContainer<>(0);
 
 	public IntegerContainerBlock() {
 		super(Block.Properties.create(Material.ROCK));
-		logger.info("Constructing IntegerContainerBlock!");
 	}
 	
 	@Override
