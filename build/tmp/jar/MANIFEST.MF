@@ -3,7 +3,7 @@ Specification-Title: LeopardCraft
 Specification-Vendor: RobotLeopard86
 Specification-Version: 1
 Implementation-Title: LeopardCraft
-Implementation-Version: 0.2.0
+Implementation-Version: 0.3.0
 Implementation-Vendor: RobotLeopard86
-Implementation-Timestamp: 2020-09-27T09:42:51-0700
+Implementation-Timestamp: 2020-11-25T10:09:55-0600
 

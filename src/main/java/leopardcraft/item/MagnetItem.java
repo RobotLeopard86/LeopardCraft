@@ -13,8 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class MagnetItem extends Item {
-
-	public Logger logger = LogManager.getLogger();
 	
 	public MagnetItem() {
 		super(new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1).setNoRepair());
@@ -26,10 +24,8 @@ public class MagnetItem extends Item {
 	
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context) {
-		logger.info("busting those orez");
 		BlockPos usePos = context.getPos();
 		findOreBlocks(usePos.getX(), usePos.getY(), usePos.getZ(), context);
-		logger.info("busted those orez");
 		return ActionResultType.SUCCESS;
 	}
 	
@@ -40,11 +36,9 @@ public class MagnetItem extends Item {
 			for(int y = (yPos - 5); y < (yPos + 5); y++) {
 				for(int z = (zPos - 5); z < (zPos + 5); z++) {
 					pos = getPosFromXYZ(x, y, z);
-					logger.info("Lookin for those orez @ " + pos);
-					if(world.getBlockState(pos).getBlock() == Blocks.EMERALD_ORE || world.getBlockState(pos).getBlock() == Blocks.DIAMOND_ORE || world.getBlockState(pos).getBlock() == Blocks.IRON_ORE || world.getBlockState(pos).getBlock() == Blocks.COAL_ORE || world.getBlockState(pos).getBlock() == Blocks.GOLD_ORE || world.getBlockState(pos).getBlock() == Blocks.REDSTONE_ORE || world.getBlockState(pos).getBlock() == Blocks.NETHER_QUARTZ_ORE) {
+					if(world.getBlockState(pos).getBlock() == Blocks.EMERALD_ORE || world.getBlockState(pos).getBlock() == Blocks.DIAMOND_ORE || world.getBlockState(pos).getBlock() == Blocks.IRON_ORE || world.getBlockState(pos).getBlock() == Blocks.COAL_ORE || world.getBlockState(pos).getBlock() == Blocks.GOLD_ORE || world.getBlockState(pos).getBlock() == Blocks.REDSTONE_ORE || world.getBlockState(pos).getBlock() == Blocks.NETHER_QUARTZ_ORE || world.getBlockState(pos).getBlock() == Blocks.LAPIS_ORE) {
 						context.getPlayer().inventory.addItemStackToInventory(new ItemStack(getItemFromBlock(world.getBlockState(pos).getBlock())));
 						world.setBlockState(pos, Blocks.AIR.getDefaultState());
-						logger.info("goodbye");
 					}
 				}
 			}
